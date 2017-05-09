@@ -24,3 +24,4 @@ Para limpiar el resultado de proucción de la carpeta _build:
 Para compilar a producción ejecutar el siguiente comando:
 
 --> gulp"# transformacionDigital" 
+"# transformacionDigital" 
