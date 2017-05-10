@@ -1,0 +1,496 @@
+<!--Inicio Area titulo-->
+<div id="titulo">
+   <div id="contenedortitulo">
+      <div id="topepanel">
+         <h2>Mantenimiento de Productos</h2>
+      </div>
+      <!--fin area tope panel-->
+      <div class="breadcrumbs">
+         <ul>
+            <li><a href="#">Inicio / </a></li>
+            <li>Test Request Generation</li>
+         </ul>
+      </div>
+   </div>
+</div>
+<div id="bodymantenimientos">
+   <div id="cuerpomantenimientos">
+      <!--Inicio Area mantenimientos-->
+      <form name="moldedFormalization.formMoldedFormalization" novalidate role="form">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 campomantenimiento">
+            <div class="divheader">
+               <h2>Personalizacion de Plástico / Embozado</h2>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="mantenimiento">
+                  <span class="label">Nombre en Plástico</span>
+                  <span class="input2">
+                  <input name="namePlastic"
+                     type="text"
+                     class="mayusculas"
+                     ng-class="{ 'hasError': (validationAccount.submitted || moldedFormalization.formMoldedFormalization.namePlastic.$touched) && 
+                     moldedFormalization.formMoldedFormalization.namePlastic.$invalid ||
+                     moldedFormalization.espresion}"
+                     ng-model="moldedFormalization.viewModelmoldedFormalization.namePlastic"
+                     ng-maxlength="18"
+                     ng-change= "moldedFormalization.validAcen();"
+                     ng-required="true" />
+                  <span 
+                     class="alerttext" 
+                     ng-if="(validationAccount.submitted ||  moldedFormalization.formMoldedFormalization.namePlastic.$touched) &&  
+                     moldedFormalization.formMoldedFormalization.namePlastic.$invalid"
+                     >Este campo es obligatorio
+                  </span>
+                  <span 
+                     class="alerttext" 
+                     ng-if="moldedFormalization.espresion"
+                     >Este campo no permite numeros ni acentos
+                  </span>
+                  <span
+                     class="alerttext"
+                     ng-if="moldedFormalization.formMoldedFormalization.namePlastic.$error.maxlength"
+                     ng-bind="::i18n.general.maxLength">
+                  </span>
+                  </span> <span class="label">Número de TC</span> <span class="input2">
+                  <input name="" type="text" 
+                     value="4540-9805-3333-1111"
+                     ng-disabled="true"/>
+                  </span> 
+               </div>
+            </div>
+            <div class="botonarearight btnValid"> 
+               <button
+                  class="boton btnlager btnInactive" 
+                  ng-disabled="true">
+               Vincular TC principal
+               </button>
+            </div>
+         </div>
+      </form>
+         <span class="separador">
+            <hr />
+         </span>
+      <form name="moldedFormalization.formMoldedFormalization" novalidate role="form">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 campomantenimiento">
+            <div class="divheader">
+               <h2>Datos Tarjeta Adicional</h2>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="mantenimiento"> <span class="label">Nombre en Plástico</span>
+                  <span class="input">
+                  <h1 ng-click="moldedFormalization.validateClient()" ng-model="name"></h1>
+                  <input name="namePlastic2"
+                     type="text"
+                     class="mayusculas"
+                     ng-class="{ 'hasError': (moldedFormalization.formMoldedFormalization.namePlastic2.$touched)
+                     && moldedFormalization.formMoldedFormalization.namePlastic2.$invalid 
+                     || moldedFormalization.espresion2}"
+                     ng-model="moldedFormalization.namePlastic2"
+                     ng-maxlength="50"
+                     ng-change= "moldedFormalization.validAcen2();"
+                     ng-required="true" />
+                  <span 
+                     class="alerttext" 
+                     ng-if="(validationAccount.submitted ||  moldedFormalization.formMoldedFormalization.namePlastic2.$touched) &&  
+                     moldedFormalization.formMoldedFormalization.namePlastic2.$invalid"
+                     >Este campo es obligatorio
+                  </span>
+                  <span 
+                     class="alerttext" 
+                     ng-if="moldedFormalization.espresion2"
+                     >Este campo no permite numeros ni acentos
+                  </span>
+                  <span
+                     class="alerttext"
+                     ng-if="moldedFormalization.formMoldedFormalization.namePlastic2.$error.maxlength"
+                     ng-bind="::i18n.general.maxLength">
+                  </span>
+                  </span> 
+               </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="columna2_1">
+                  <div class="mantenimiento">
+                     <span class="label">Cédula</span> 
+                     <span class="input2">
+                     <input name="identificationName" type="text"  
+                        ng-model="moldedFormalization.viewModelmoldedFormalization.identificationName"
+                        ng-keypress=" ($event.keyCode == 13) ? moldedFormalization.validateClient() : 0"
+                        ng-class="{ 'hasError': (moldedFormalization.submitted || 
+                        moldedFormalization.formMoldedFormalization.identificationName.$touched) && 
+                        moldedFormalization.formMoldedFormalization.identificationName.$invalid}" />
+                        <button class="boton" ng-click=" moldedFormalization.validateClient()">
+                           Validar Cédula
+                        </button>
+                     </span>  
+                        
+                     <span class="label">Sexo</span>
+                     <span class="input2">
+                        <select
+                           id="gender"
+                           name="sex"
+                           ng-model="moldedFormalization.sex"
+                           ng-class="{ 'hasError': (validationAccount.submitted || moldedFormalization.formMoldedFormalization.sex.$touched)
+                           && moldedFormalization.formMoldedFormalization.status.$invalid}"
+                           ng-options="sexo.id as sexo.value for sexo in moldedFormalization.typeSex"
+                           ng-required="true">
+                        </select>
+                        <span class="alerttext" 
+                           ng-if="(validationAccount.submitted || moldedFormalization.formMoldedFormalization.sex.$touched) 
+                           && moldedFormalization.formMoldedFormalization.sex.$error.required">Este campo es obligatorio</span> 
+                     </span>
+                  </div>
+               </div>
+               <div class="columna2_2">
+                  <div class="mantenimiento">
+                     <span class="label">Nacionalidad</span> 
+                     <span class="input2">
+                     <select class="selectfield full prepoblado" name="nationality" ng-model="customerBasicData.viewModelBasicData.nationality"
+                     id="nacionalidad"
+                     name="nacionalidad"
+                      ng-model="moldedFormalization.nacionalidad"
+                      ng-class="{ 'hasError': (customerBasicData.submitted || customerBasicData.formCustomerBasicData.nationality.$touched) && customerBasicData.formCustomerBasicData.nationality.$invalid }"
+                      ng-options="nationality.id as nationality.value for nationality in moldedFormalization.nationalities" value="">
+                      </select>
+                      </span>
+                     <!--<input ng-model="moldedFormalization.nationality" name="" type="text" />-->   
+                     <span class="label">Estado Civil</span> 
+                     <span class="input2" >
+                        <select
+                           name="status"
+                           ng-model="moldedFormalization.viewModelmoldedFormalization.status"
+                           ng-class="{ 'hasError': (validationAccount.submitted || moldedFormalization.formMoldedFormalization.status.$touched)
+                           && moldedFormalization.formMoldedFormalization.status.$invalid}"
+                           ng-options="optionYn.id as optionYn.value for optionYn in moldedFormalization.typeStatus"
+                           ng-required="true" >
+                           <option></option>
+                        </select>
+                        <span class="alerttext" 
+                           ng-if="(validationAccount.submitted || moldedFormalization.formMoldedFormalization.status.$touched) 
+                           && moldedFormalization.formMoldedFormalization.status.$error.required">Este campo es obligatorio</span>         
+                     </span>
+                  </div>
+               </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="columna2_1">
+                  <div class="mantenimiento"> <span class="label">Fecha Nacimiento</span>
+                     <span class="input2">
+                     <input type="text"
+                        id="fechaNacimiento"
+                        name="datePassport" 
+                        uib-datepicker-popup="{{moldedFormalization.format}}" 
+                        date-set-hidden="true"
+                        date-typer="true"
+                        ng-model="moldedFormalization.datePassport"
+                        is-open="moldedFormalization.popupDatePassport.opened"
+                        datepicker-options="moldedFormalization.dateOptions" 
+                        readonly="readonly"
+                        current-text="Hoy" 
+                        clear-text="Limpiar"
+                        close-text="Cerrar" 
+                        data-set="{{moldedFormalization.myDate}}"
+                        ng-click="moldedFormalization.openDatePassport()" 
+                        ng-class="{ 'hasError': (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
+                        && moldedFormalization.formMoldedFormalization.datePassport.$invalid }" 
+                        required />
+                     <span class="alerttext" 
+                        ng-if="(moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
+                        && moldedFormalization.formMoldedFormalization.datePassport.$error.required">Este campo es obligatorio</span>         
+                     </span> <span class="label">Telefono</span> 
+                     <span class="input2">
+                     <input type="number" 
+                        name="landLine" 
+                        ng-model="moldedFormalization.landLine" 
+                        ng-class="{'hasError': (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.landLine.$touched) && moldedFormalization.formMoldedFormalization.landLine.$invalid}"
+                        ng-maxlength="10"
+                        ng-minlength="10"
+                        required />
+                     <span class="alerttext" 
+                        ng-if="moldedFormalization.formMoldedFormalization.landLine.$error.number" 
+                        ng-bind="::i18n.general.errorValidNumeros"></span>
+                     <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.landLine.$error.required && (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.landLine.$touched)" ng-bind="::i18n.general.requiredField"></span>
+                     <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.landLine.$error.maxlength" ng-bind="::i18n.general.maxLength"></span>
+                     <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.landLine.$error.minlength" ng-bind="::i18n.general.errorValid10Digi"></span>
+                     </span> 
+                  </div>
+               </div>
+               <div class="columna2_2">
+                  <div class="mantenimiento"> <span class="label">Email</span>
+                     <span class="input">
+                     <input type="email" 
+                        name="email" 
+                        ng-model="moldedFormalization.email" 
+                        ng-class="{ 'hasError': moldedFormalization.formMoldedFormalization.email.$touched
+                        && moldedFormalization.formMoldedFormalization.email.$invalid }" 
+                        ng-maxlength="50"/>
+                     <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.email.$error.maxlength" ng-bind="::i18n.general.maxLength"></span>
+                     <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.email.$error.email" ng-bind="::i18n.general.errorEmail"></span>
+                     </span> 
+                  </div>
+               </div>
+            </div>
+            <div class="botonarearight btnValid"> 
+               <button
+                  class="boton btnlager" 
+                  ng-click=" moldedFormalization.validateClient()"
+                  >
+               Vincular TC adicional
+               </button>
+            </div>
+         </div>
+      </form>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 campomantenimiento" style="display:none">
+         <div class="divheader">
+            <h2>Formalización</h2>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="mantenimiento">
+               <span class="label">Opciones</span> 
+               <span class="input2">
+                  <ul class="radio">
+                     <li>
+                        <label>
+                        <input type="radio"/>
+                        <span class="radio"></span> </label>
+                        <p>Activación TC</p>
+                     </li>
+                     <li>
+                        <label>
+                        <input type="radio"/>
+                        <span class="radio"></span> </label>
+                        <p>Contrato</p>
+                     </li>
+                     <li>
+                        <label>
+                        <input type="radio"/>
+                        <span class="radio"></span> </label>
+                        <p>Acuse</p>
+                     </li>
+                     <li>
+                        <label>
+                        <input type="radio"/>
+                        <span class="radio"></span> </label>
+                        <p>Manual Operativo</p>
+                     </li>
+                     <li>
+                        <label>
+                        <input type="radio"/>
+                        <span class="radio"></span> </label>
+                        <p>Tarifario</p>
+                     </li>
+                  </ul>
+               </span>
+               <span class="label">Digite la clave solicitada<br />
+               de la tarjeta de claves</span> 
+               <span class="input2">
+                  <div class="inputTdcWrap">
+                     <div class="keyWrap">
+                        <p>11</p>
+                     </div>
+                     <div class="inputKeyWrap">
+                        <input type="text" placeholder="XXXX" maxlength="4" required="">
+                     </div>
+                     <a href="#" class="boton btngreen">validar</a> 
+                  </div>
+               </span>
+            </div>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="mantenimiento"> <span class="label">Tipo de Documentos <br />
+               a Expediente Onbase</span> <span class="input">
+               <input name="" type="text" style="margin-right:5px; width:65%" />
+               <a href="#" class="boton btnsmall btnblack">Buscar</a><a href="#" class="boton btnsmall btnblack">Adjuntar</a> </span>
+            </div>
+         </div>
+         <div class="botonarearight"> <a href="#" class="boton btnlager btnblack">Generar DAC</a></div>
+      </div>
+      <span class="separador">
+         <hr />
+      </span>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 campomantenimiento">
+         <div class="divheader">
+            <h2>Envio Estado de Cuenta</h2>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="mantenimiento">
+               <span class="label">Lugar de Envio</span> 
+               <span class="input">
+                  <select name="" style="width:35%">
+                     <option>Correo</option>
+                     <option>Casa</option>
+                     <option>Trabajo</option>
+                     <option>Otro</option>
+                  </select>
+               </span>
+            </div>
+         </div>
+         <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr class="grid_title">
+               <td style="width:20%">Calle</td>
+               <td style="width:5%">No.</td>
+               <td style="width:5%">Apt</td>
+               <td style="width:10%">Sector</td>
+               <td style="width:10%">Provincia</td>
+               <td style="width:10%">Municipio</td>
+               <td style="width:10%">Sección</td>
+               <td style="width:10%">Paraje</td>
+               <td class="ultimo" style="width:20%">Email</td>
+            </tr>
+            <tr class="grid_text">
+               <td ><span class="inputCalle"><input type="text" style="width:100%"/></span></td>
+               <td ><span class="inputNo"><input type="number" style="width:100%"/></span></td>
+               <td><span class="inputNo"><input type="number" style="width:100%"/></span></td>
+               <td>
+                  <span class="inputSector">
+                     <select>
+                        <option>Sector</option>
+                     </select>
+                  </span>
+               </td>
+               <td>
+                  <span class="inputSector">
+                     <select>
+                        <option>Privincia</option>
+                     </select>
+                  </span>
+               </td>
+               <td>
+                  <span class="inputSector">
+                     <select>
+                        <option>Municipio</option>
+                     </select>
+                  </span>
+               </td>
+               <td>
+                  <span class="inputSector">
+                     <select>
+                        <option>Sección</option>
+                     </select>
+                  </span>
+               </td>
+               <td>
+                  <span class="inputSector">
+                     <select>
+                        <option>Pareje</option>
+                     </select>
+                  </span>
+               </td>
+               <td><span class="inputCalle"><input type="email" style="width:100%"/></span></td>
+            </tr>
+         </table>
+      </div>
+      <div class="botonareacenter">
+         <button ng-click="moldedFormalization.modalCancel()" 
+            class="boton3 btnlager2 btnred" >
+         Cancelar
+         </button>
+         <button  
+            class="boton3 btnlager2 btnblue" 
+            id="myBtn">
+         Impresión Tarjetas
+         </button>
+         <button  
+            class="boton3 btnlager2 btngreen">
+         Re-Imprimir
+         </button>
+      </div>
+      <!--Inicio Area footer-->
+      <!--Fin Area mantenimientos--> 
+    </div> 
+</div>
+<div id="myModal" class="modal">
+   <!-- Modal content -->
+   <div class="modal-content">
+      <span class="close"></span>
+      <div class="remodal modal50"  data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+         <div class=" campomantenimientomodal">
+            <h2>Formalización</h2>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+               <div class="tdc">
+                  <img src="img/tdcImg.png" width="296" height="134" />
+                  <p style="width:100%; text-align:center; padding:8px 0px">Digite la clave solicitada de la tarjeta de claves</p>
+               </div>
+               <div class="inputTdcWrap" style="margin:auto">
+                  <div class="keyWrap">
+                     <p>11</p>
+                  </div>
+                  <div class="inputKeyWrap">
+                     <input type="password" placeholder="XXXX" maxlength="4" required="">
+                  </div>
+               </div>
+               <div class="mantenimiento" style="display:none">
+                  <span class="label">Formalización y Activación TC</span> 
+                  <span class="input2">
+                     <ul class="radio">
+                        <li>
+                           <label>
+                           <input type="radio"/>
+                           <span class="radio"></span> </label>
+                           <p>Activación TC</p>
+                        </li>
+                        <li>
+                           <label>
+                           <input type="radio"/>
+                           <span class="radio"></span> </label>
+                           <p>Contrato</p>
+                        </li>
+                        <li>
+                           <label>
+                           <input type="radio"/>
+                           <span class="radio"></span> </label>
+                           <p>Acuse</p>
+                        </li>
+                        <li>
+                           <label>
+                           <input type="radio"/>
+                           <span class="radio"></span> </label>
+                           <p>Manual Operativo</p>
+                        </li>
+                        <li>
+                           <label>
+                           <input type="radio"/>
+                           <span class="radio"></span> </label>
+                           <p>Tarifario</p>
+                        </li>
+                     </ul>
+                  </span>
+                  <span class="label">Digite la clave solicitada<br />
+                  de la tarjeta de claves</span> 
+                  <span class="input2">
+                     <div class="inputTdcWrap">
+                        <div class="keyWrap">
+                           <p>11</p>
+                        </div>
+                        <div class="inputKeyWrap">
+                           <input type="password" placeholder="XXXX" maxlength="4" required="">
+                        </div>
+                     </div>
+                  </span>
+               </div>
+            </div>
+         </div>
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="mantenimiento"> <span class="label">Adjuntar Documento<br />
+               a Expediente Onbase</span> <span class="input">
+               <input name="" type="text" style="margin-right:5px; width:65%" />
+               <a href="#" class="boton btnsmall btnblack">Buscar</a><a href="#" class="boton btnsmall btnblack">Adjuntar</a> </span>
+            </div>
+         </div>
+      </div>
+      <div class="botonarea"> <a href="#" class="boton btnred">Cancelar</a> <a href="#modal2" class="boton">Salvar</a></div>
+   </div>
+</div>
+<!--<div class="remodal modal50" data-remodal-id="modal2" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+   <div class=" campomantenimientomodal">
+     <h2>Tarjeta Activada</h2>
+     <div class="aceptacion">
+       <p>Documentos a Enviar</p>
+       <p>Contrato / Acuse / Manual Operativo / Tarifario</p>
+     </div>
+     <div class="botonareacenter">
+       <p style="margin:5px 0; font-size:10pt; line-height:18pt; color:#a1a1a1; float:left">USUARIO NO TIENE EMAIL</p>
+       <a href="#" class="boton3 btnlager2 btnblue">Imprimir</a></div>
+     <div class="botonareacenter"> <a href="#" class="boton3 btnlager2 btngreen">Aceptar</a></div>
+   </div>
+   </div>-->

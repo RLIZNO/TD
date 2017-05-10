@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=10" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>::: Banco BHD León :::</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/vendor.min.css">
+	<link rel="stylesheet" href="css/main.min.css">
+</head>
+<body class="bodyGris">
+	<!--HEADER-->
+	<div class="Header Gradient-gris">
+		<!--HEADER IZQUIERDA-->
+		<div class="Left">
+			<div class="LogoBhd"></div>
+		</div>
+		<!--FIN HEADER IZQUIERDA-->
+		<!--HEADER DERECHA-->
+		<div class="Right" ng-controller="indexController as index">
+			<div class="Btn-Cerrarsesion Gradient-gris">
+				<div class="Icono"></div>
+				<a>Cerrar<br />Sesión</a></div>
+			<div class="Btn-Usuario">
+				<div class="Icono"></div>
+				<span ng-bind="index.name"></span><br />
+				<span ng-bind="index.fecha.getDate() + ' de ' + index.meses[index.fecha.getMonth()] + ' de ' + index.fecha.getFullYear()"></span>
+				<span ng-bind="index.theTime"></span>
+			</div>
+		</div>
+		<!--FIN HEADER DERECHA-->
+	</div>
+	<!--FIN HEADER-->
+	<div class="clear"></div>
+	<!--CONTENIDO-->
+	<div ui-view><div id="main-container"></div></div>
+	<!--FIN CONTENIDO-->
+	<!--FOOTER-->
+	<div class="clear"></div>
+	<div class="clear"></div>
+	<div class="divPpal">
+		<div class="divNoventaNueve floatCenter alignCenter border-light-top paddingVertical">
+			<p class="texto">Banco BHD León versión 1.0 © 2016</p>
+		</div>
+	</div>
+	<!--FIN FOOTER-->
+	<script src="js/vendor.min.js"></script>
+	<script src="js/app.min.js"></script>
+</body>
+</html>
