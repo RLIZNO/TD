@@ -82,6 +82,7 @@
 	    		warning : {
 					modalCompeteFieldsOrClean : 'Debe completar los campos requeridos antes de visualizar el detalle esta ocupación, o limpiar la información en pantalla',
 					modalCancelprocess : '¿Está seguro de que desea cancelar este proceso?',
+					modalCancelprocessGR : '¿Está seguro de que desea volver al menu de Grupo Ramos?',
 					modalDeleteOcupation : '¿Está seguro que desea eliminar esta ocupación?',
 					modalUploadOnbseContent : '¿Está seguro de que desea eliminar este documento?',
 					modaltitleWarning : 'Advertencia',

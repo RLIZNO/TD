@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -12,6 +12,7 @@
         'validationClientService',
         'modalFactory',
         'SELECT_DEFAULT',
+        'ngXml2json',
         'catalogService',
         'catalogComplexService',
         'CATALOG',
@@ -28,6 +29,7 @@
         validationClientService,
         modalFactory,
         SELECT_DEFAULT,
+        ngXml2json,
         catalogService,
         catalogComplexService,
         CATALOG,
@@ -39,7 +41,7 @@
     ) {
         var vm = this;
         //variables
-        vm.pattern = "[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+";
+        vm.pattern="[a-zA-ZñÑáéíóúÁÉÍÓÚ\s]+";
         vm.popupDatePassport = { /*Boolean que abre y cierra el datepicker de fecha de pasaporte */
             opened: false
         };
@@ -51,6 +53,7 @@
         };
         vm.countryRd = '';
         vm.countries = []; /*Array con toda la lista de paises */
+        vm.optionsYesNo = [];
         // variable de username quemado
         vm.username = 'AM029969';
 
@@ -58,7 +61,7 @@
         vm.modalCancel = modalCancel;
         vm.validAcen = validAcen;
         vm.getTypeDStatus = getTypeDStatus;
-        vm.openDatePassport = openDatePassport;
+        vm.openDatePassport  = openDatePassport;
         vm.validAcen2 = validAcen2;
         vm.getValidPlace = getValidPlace;
         vm.getCountries = getCountries;
@@ -89,78 +92,85 @@
         vm.myDate = "";
         vm.nacionalidad= document.getElementById("nacionalidad");
         vm.genderSelect = document.getElementById("gender");
-        vm.bornDay = document.getElementById("fechaNacimiento");
+        vm.validAditional = validAditional;
+        vm.aggAditional = false;
+        vm.validImpre = validImpre;
 
-        /*$scope.primerNombre = "Jose";
-        $scope.test = function(){
-            $scope.primerNombre = "Ronny";
-        }*/
+        function validImpre(){
+            window.location.href = "#/result";
+        }
+
+        /**
+         *  @ngdoc method
+         *  @name getTypeDocuments
+         *  @methodOf App.controller:validationAccountController
+         *
+         *  @description
+         *  Funcion que permite hacer la condicin de la nacionalidad y mostrar alerta.
+         */ 
+        function validAditional() {
+           vm.aggAditional = false;
+           if (vm.viewModelmoldedFormalization.aditional == vm.optionsYesNo[1].id) {
+                vm.aggAditional = true;
+                vm.bornDay = document.getElementById("fechaNacimiento");
+           }else {
+                vm.aggAditional = false;
+           }
+
+           if ( vm.viewModelmoldedFormalization.aditional == undefined){
+               vm.aggAditional = false;
+           }
+        }
 
         var dataSiebel = localStorage.getItem("dataSiebel");
-        /*if (dataSiebel === "true") {
-            jsonData = JSON.parse(localStorage.getItem("jsonDataClient"));
-            vm.viewModelmoldedFormalization.namePlastic = jsonData.firtsName + ' ' + jsonData.surname;
-            if (jsonData.email === undefined) {
-                vm.placeSendingSlect = [{
-                        value: "Casa"
-                    },
-                    {
-                        value: "Trabajo"
-                    },
-                    {
-                        value: "Otro"
-                    }
-                ];
-            } else {
-                vm.placeSendingSlect = [{
-                        value: "Correo"
-                    },
-                    {
-                        value: "Casa"
-                    },
-                    {
-                        value: "Trabajo"
-                    },
-                    {
-                        value: "Otro"
-                    }
-                ];
-                vm.viewModelmoldedFormalization.correo = jsonData.email;
-            }
-        } else {
-            jsonData = JSON.parse(localStorage.getItem("jsonData"));
-            vm.viewModelmoldedFormalization.namePlastic = jsonData.firtsName + ' ' + jsonData.surname;
-            if (jsonData.email === undefined) {
-                vm.placeSendingSlect = [{
-                        value: "Casa"
-                    },
-                    {
-                        value: "Trabajo"
-                    },
-                    {
-                        value: "Otro"
-                    }
-                ];
-            } else {
-                vm.placeSendingSlect = [{
-                        value: "Correo"
-                    },
-                    {
-                        value: "Casa"
-                    },
-                    {
-                        value: "Trabajo"
-                    },
-                    {
-                        value: "Otro"
-                    }
-                ];
-                vm.viewModelmoldedFormalization.correo = jsonData.email;
-            }
-        }*/
+           if (dataSiebel === null) {
 
+           } else {
+            if(dataSiebel === "true"){
+                jsonData = JSON.parse(localStorage.getItem("jsonDataClient"));
+                vm.viewModelmoldedFormalization.namePlastic =  jsonData.firtsName + ' ' + jsonData.surname;
+                if (jsonData.email === undefined){
+                    vm.placeSendingSlect = [
+                        { value:"Casa" },
+                        { value:"Trabajo" },
+                        { value:"Otro" }
+                    ];
+                }else {
+                    vm.placeSendingSlect = [
+                        { value:"Correo" },
+                        { value:"Casa" },
+                        { value:"Trabajo" },
+                        { value:"Otro" }
+                    ];
+                    vm.viewModelmoldedFormalization.correo = jsonData.email;
+                }
+            }else {
+                jsonData = JSON.parse(localStorage.getItem("jsonData"));
+                if (jsonData === '') {
+                    vm.viewModelmoldedFormalization.namePlastic =  jsonData.firtsName + ' ' + jsonData.surname;
+                    if (jsonData.email === undefined){
+                        vm.placeSendingSlect = [
+                            { value:"Casa" },
+                            { value:"Trabajo" },
+                            { value:"Otro" }
+                        ];
+                    }else {
+                        vm.placeSendingSlect = [
+                            { value:"Correo" },
+                            { value:"Casa" },
+                            { value:"Trabajo" },
+                            { value:"Otro" }
+                        ];
+                        vm.viewModelmoldedFormalization.correo = jsonData.email;
+                    }
+                }
 
-        function getValidPlace() {
+            }
+
+           }
+            
+        
+        function getValidPlace(){
 
             if (vm.viewModelmoldedFormalization.palceSending.value === 'Correo') {
                 vm.validCorreo = true;
@@ -169,54 +179,54 @@
             if (vm.viewModelmoldedFormalization.palceSending.value === 'Casa') {
                 vm.validCorreo = false;
                 vm.disableSelect = true;
-                if (jsonData.street === undefined) {
+                if (jsonData.addressList[0].street === undefined) {
                     vm.viewModelmoldedFormalization.calle = '';
                 } else {
-                    vm.viewModelmoldedFormalization.calle = jsonData.street;
+                    vm.viewModelmoldedFormalization.calle = jsonData.addressList[0].street;
                 }
 
-                if (jsonData.street === undefined) {
+                if (jsonData.addressList[0].number === undefined) {
                     vm.viewModelmoldedFormalization.number = '';
                 } else {
-                    vm.viewModelmoldedFormalization.number = jsonData.residenceNumber;
+                    vm.viewModelmoldedFormalization.number = parseInt(jsonData.addressList[0].number);
                 }
 
-                if (jsonData.apartmentNumber === undefined) {
+                if (jsonData.addressList[0].apartmentNumber === undefined) {
                     vm.viewModelmoldedFormalization.apartament = '';
                 } else {
-                    vm.viewModelmoldedFormalization.apartament = jsonData.apartmentNumber;
+                    vm.viewModelmoldedFormalization.apartament = jsonData.addressList[0].apartmentNumber;
                 }
 
-                vm.viewModelmoldedFormalization.residenceCountry = jsonData.residenceCountry;
-                vm.viewModelmoldedFormalization.residenceProvince = jsonData.residenceProvince;
-                vm.viewModelmoldedFormalization.residenceMunicipality = jsonData.residenceMunicipality;
-                vm.viewModelmoldedFormalization.section = jsonData.residenceSection;
-                vm.viewModelmoldedFormalization.place = jsonData.residencePlace;
-                if (jsonData.email === undefined) {
+                vm.viewModelmoldedFormalization.residenceCountry = parseInt(jsonData.addressList[0].country.id);
+                vm.viewModelmoldedFormalization.residenceProvince = parseInt(jsonData.addressList[0].province.id);
+                vm.viewModelmoldedFormalization.residenceMunicipality = parseInt(jsonData.addressList[0].municipality.id);
+                vm.viewModelmoldedFormalization.section = parseInt(jsonData.addressList[0].section.id);
+                vm.viewModelmoldedFormalization.place = parseInt(jsonData.addressList[0].place.id);
+                if (jsonData.email === undefined){
                     vm.viewModelmoldedFormalization.correoCasa = '';
-                } else {
+                }else {
                     vm.viewModelmoldedFormalization.correoCasa = jsonData.email;
                 }
 
                 getCitiesResidences(vm.viewModelmoldedFormalization.residenceCountry);
                 getMunicipalities(vm.viewModelmoldedFormalization.residenceProvince);
                 getSectors(vm.viewModelmoldedFormalization.residenceMunicipality);
-                getPlaces(vm.viewModelmoldedFormalization.section);
+                getPlaces(vm.viewModelmoldedFormalization.section);  
             }
 
             if (vm.viewModelmoldedFormalization.palceSending.value === 'Trabajo') {
                 vm.validCorreo = false;
                 vm.disableSelect = true;
-                if (jsonData.street === undefined) {
+                if (jsonData.incomes[0].address.street === undefined) {
                     vm.viewModelmoldedFormalization.calle = '';
                 } else {
-                    vm.viewModelmoldedFormalization.calle = jsonData.street;
+                    vm.viewModelmoldedFormalization.calle = jsonData.incomes[0].address.street;
                 }
 
-                if (jsonData.street === undefined) {
+                if (jsonData.incomes[0].address.number === undefined) {
                     vm.viewModelmoldedFormalization.number = '';
                 } else {
-                    vm.viewModelmoldedFormalization.number = jsonData.residenceNumber;
+                    vm.viewModelmoldedFormalization.number = parseInt(jsonData.incomes[0].address.number);
                 }
 
                 if (jsonData.apartmentNumber === undefined) {
@@ -225,21 +235,21 @@
                     vm.viewModelmoldedFormalization.apartament = jsonData.apartmentNumber;
                 }
 
-                vm.viewModelmoldedFormalization.residenceCountry = jsonData.residenceCountry;
-                vm.viewModelmoldedFormalization.residenceProvince = jsonData.residenceProvince;
-                vm.viewModelmoldedFormalization.residenceMunicipality = jsonData.residenceMunicipality;
-                vm.viewModelmoldedFormalization.section = jsonData.residenceSection;
-                vm.viewModelmoldedFormalization.place = jsonData.residencePlace;
-                if (jsonData.email === undefined) {
+                vm.viewModelmoldedFormalization.residenceCountry = parseInt(jsonData.incomes[0].address.country.id);
+                vm.viewModelmoldedFormalization.residenceProvince = parseInt(jsonData.incomes[0].address.province.id);
+                vm.viewModelmoldedFormalization.residenceMunicipality = parseInt(jsonData.incomes[0].address.municipality.id);
+                vm.viewModelmoldedFormalization.section = parseInt(jsonData.incomes[0].address.section.id);
+                vm.viewModelmoldedFormalization.place = parseInt(jsonData.incomes[0].address.place.id);  
+                if (jsonData.email === undefined){
                     vm.viewModelmoldedFormalization.correoCasa = '';
-                } else {
+                }else {
                     vm.viewModelmoldedFormalization.correoCasa = jsonData.email;
                 }
 
                 getCitiesResidences(vm.viewModelmoldedFormalization.residenceCountry);
                 getMunicipalities(vm.viewModelmoldedFormalization.residenceProvince);
                 getSectors(vm.viewModelmoldedFormalization.residenceMunicipality);
-                getPlaces(vm.viewModelmoldedFormalization.section);
+                getPlaces(vm.viewModelmoldedFormalization.section);  
             }
 
             if (vm.viewModelmoldedFormalization.palceSending.value === 'Otro') {
@@ -254,8 +264,48 @@
                 vm.viewModelmoldedFormalization.place = '';
                 vm.viewModelmoldedFormalization.correoCasa = '';
             }
-
+            
         }
+
+                /**
+         *  @ngdoc method
+         *  @name validateClient
+         *  @methodOf App.controller:creationAccountController
+         *
+         *  @description
+         *  Valida si el cliente existe o no.
+         *  Consulta los datos básicos del cliente y los coloca en la vista.
+         */
+
+
+        function validateClient()  {
+            var keyCode = event.which || event.keyCode;
+            if (keyCode === 13) {
+
+            var documentNumber = vm.viewModelmoldedFormalization.identificationName;
+            resetData();
+            validationClientService.getValidationClient(documentNumber, vm.viewModelmoldedFormalization.typeIdentification, vm.username).then(function(responseValue) {
+                        $timeout(function(){
+                            vm.validationClient = responseValue.validationClient;
+                            validateClientCanContinue();
+
+                            if (!vm.validationClient) {
+                                getCreditBureauNoCLient();
+                                getCreditListService();
+                                vm.clientNo = false;
+                            }
+                            if (vm.validationClient) {
+                                getCreditBureau();
+                                getCreditListService();
+                                vm.clientYes = true;
+                            }
+                            }, 0);
+                        }, modalError);
+
+            }
+
+        };
+
 
         /**
          *
@@ -270,6 +320,7 @@
                 oJson = {},
                 clientCountry = '',
                 clientAge;
+
 
             creditBureauService.getValidCreditBureau(documentNumber, vm.username).then(function(responseValue) {
 
@@ -365,33 +416,44 @@
                     jsonData.residenceProvince = oJson.reportecu.reporte.datoslocalizacion.cod_provincia_nombre;
                     jsonData.residenceMunicipality = oJson.reportecu.reporte.datoslocalizacion.ciudadresidencia;
 
-                    clientAge = utilFactory.getAge(jsonData.birthDate);
 
-                    if (clientAge < 18) {
-                        modalFactory.error(messages.modals.error.notAllowedAge);
-                    } else {
-                        vm.ageAllowed = true;
+                     /*Verificamos si la nacionalidad del cliente nuevo es DOMINICANA para convertirlo a REPUBLICA DOMINICANA */
+                    if(jsonData.nationality === messages.general.dominicanCountry){
+                        jsonData.nationality = messages.general.dominicanCountrySibel;
+                    }else{
+                        jsonData.nationality = jsonData.nationality;
                     }
 
-                    /*Recoremos el tipo de documento para capturar el nombre del tipo de documento seleccionado*/
+                    vm.getBureau = true;
+                    vm.datePassport = jsonData.birthDate;
+                    vm.email = jsonData.email;
+                    vm.myDate = jsonData.birthDate;
+                    vm.bornDay.setRangeText(vm.datePassport.substring(0, 10));
 
-                    angular.forEach(vm.typeDocuments, function(value, key) {
-                        if (value.id === vm.viewModelmoldedFormalization.typeIdentification) {
-                            jsonData.nameTypeIdentification = value.value;
+                    vm.namePlastic2 = jsonData.firtsName + ' ' + jsonData.surname;
+                    vm.landLine = parseInt(jsonData.landLine);
+
+                    /** Validaciones para el tipo de moneda en dolares, donde se ocultan los campos Compra cheques de gerencia */
+                    angular.forEach(vm.typeSex, function (value, key) {
+                        if (value.value === jsonData.sex) {
+                            vm.viewModelmoldedFormalization.sex = value.id;
                         }
                     });
 
-                    vm.getBureau = true;
-                    vm.namePlastic2 = jsonData.firtsName + ' ' + jsonData.secondName + ' ' + jsonData.surname + ' ' + jsonData.secondSurname;
-                    localStorage.setItem("jsonData", jsonData)
-                    localStorage.setItem("jsonData", JSON.stringify(jsonData))
-                    jsonData = JSON.parse(localStorage.getItem("jsonData"));
-                    var dataSiebel = false;
-                    localStorage.setItem("dataSiebel", dataSiebel);
-                    console.log(jsonData);
-                    getvalidateClientCreditCard();
-                    validateClientCanContinue();
-                    validLimiteManteniment();
+                    /** Validaciones para el tipo de moneda en dolares, donde se ocultan los campos Compra cheques de gerencia */
+                    angular.forEach(vm.nationalities, function (value, key) {
+                        if (value.value === jsonData.nationality) {
+                            vm.viewModelmoldedFormalization.nacionalidad = value.id;
+                        }
+                    });
+
+                    /** Validaciones para el tipo de moneda en dolares, donde se ocultan los campos Compra cheques de gerencia */
+                    angular.forEach(vm.typeStatus, function (value, key) {
+                        if (value.value === jsonData.civilStatus) {
+                            vm.viewModelmoldedFormalization.status = value.id;
+                        }
+                    });
+
                 }, modalError);
 
                 if (!vm.findJudicialEvaluation) {
@@ -403,6 +465,9 @@
 
 
             }, modalError);
+
+
+
 
         }
 
@@ -423,57 +488,30 @@
             vm.isDominicanRepublic = false;
             vm.findPep = false;
             vm.getBureau = false;
-            vm.clientUser = '';
-            vm.decisionMoti = '';
-            vm.decisionMessage = '';
-            vm.limiteMaximoRd = '';
-            vm.limiteMaximoUs = '';
+            vm.datePassport = '';
+            vm.email = '';
+            vm.myDate = '';
+            vm.viewModelmoldedFormalization.status = '';
+            vm.viewModelmoldedFormalization.nacionalidad = '';
+            vm.viewModelmoldedFormalization.sex = '';
+            vm.namePlastic2 = '';
+            vm.landLine = '';
             vm.urlXml = null;
             vm.fichaBand = false;
             vm.getControlList = false;
             vm.validationClient = false;
             vm.viewModelmoldedFormalization.typeIdentification = 2;
-            vm.bornDay.value = '';
+            vm.bornDay = '';
             vm.datePassport = '';
+            vm.limiteMaximoRd = '';
+            vm.limiteMaximoUs = '';
+            vm.clientUser = '';
+            vm.decisionMoti = '';
+            vm.decisionMessage = '';
         }
 
         resetData();
 
-        /**
-         *  @ngdoc method
-         *  @name validateClient
-         *  @methodOf App.controller:creationAccountController
-         *
-         *  @description
-         *  Valida si el cliente existe o no.
-         *  Consulta los datos básicos del cliente y los coloca en la vista.
-         */
-
-
-        function validateClient()  {
-            var documentNumber = vm.viewModelmoldedFormalization.identificationName;
-
-            resetData();
-
-            validationClientService.getValidationClient(documentNumber, vm.viewModelmoldedFormalization.typeIdentification, vm.username).then(function(responseValue) {
-            $timeout(function(){
-                vm.validationClient = responseValue.validationClient;
-                validateClientCanContinue();
-
-                if (!vm.validationClient) {
-                    getCreditBureauNoCLient();
-                    getCreditListService();
-                    vm.clientNo = false;
-                }
-                if (vm.validationClient) {
-                    getCreditBureau();
-                    //getCreditListService();
-                    vm.clientYes = true;
-                }
-                }, 0);
-            }, modalError);
-
-        };
 
         /**
          *  @ngdoc function
@@ -512,22 +550,17 @@
 
                     if (vm.finObs) {
                         vm.fichaBand = true;
-                        vm.decisionMessage = 'PRE-APROBADO';
                         vm.decisionMoti = messages.modals.error.badOberved;
                         modalFactory.error(messages.modals.error.badOberved);
                     }
 
                     if (!vm.findControlListReport) {
                         vm.fichaBand = true;
-                        vm.decisionMessage = 'RECHAZADO';
-                        vm.decisionMoti = messages.modals.error.badControlListCreationAccount;
                         modalFactory.error(messages.modals.error.badControlListCreationAccount);
                     }
 
                     if (vm.findPep) {
                         vm.fichaBand = true;
-                        vm.decisionMessage = 'RECHAZADO';
-                        vm.decisionMoti = messages.modals.error.badPepListCreationAccount;
                         modalFactory.error(messages.modals.error.badPepListCreationAccount);
                     }
                     validateClientCanContinue();
@@ -554,132 +587,63 @@
                 clientCountry = '',
                 clientAge;
 
-            creditBureauService.getValidCreditBureau(documentNumber, vm.username).then(function(responseValue) {
-
+            resetData();
+            creditBureauService.getValidCreditBureau(documentNumber, vm.username).then(function (responseValue) {
+            
                 vm.findJudicialEvaluation = responseValue.validationBuroResult;
                 if (!vm.findJudicialEvaluation) {
                     vm.getBureau = true;
-                    vm.fichaBand = true;
-                    vm.decisionMessage = 'RECHAZADO';
-                    vm.decisionMoti = 'Cliente presenta Ficha Judicial';
                     modalFactory.error(messages.modals.error.badJudicialEvaluation);
                 } else {
-                    creditBureauService.getXmlCreditBureau(documentNumber, vm.username).then(function(responseXml) {
-                        stringXml = responseXml;
 
-                        /* URL que almacena el llamado al archivo XML en el servidor */
-                        vm.urlXml = urlBase + '?documentNumber=' + documentNumber + '&userName=' + vm.username;
+                    creditBureauService.getValidCientExisting(vm.viewModelmoldedFormalization.typeIdentification ,documentNumber, vm.username).
+                        then(function   
+                            (response) {
 
+                            vm.dataClientExit = response;
 
-                        validationClientService.getSiebelCustomer(vm.viewModelmoldedFormalization.typeIdentification, documentNumber, vm.username).then(function(response) {
+                    /* Validamos si el pais de residencia es la republica dominicana */
+                    if (vm.dataClientExit.nacionality !== messages.general.dominicanCountrySibel) {
+                        modalFactory.error(messages.modals.error.notCountryAllowedAccount);
+                    } else {
+                        vm.isDominicanRepublic = true;
+                    }
+                            
+                    vm.namePlastic2 = vm.dataClientExit.firstName + ' ' + vm.dataClientExit.firstLastname;
+                    vm.landLine = parseInt(vm.dataClientExit.cellPhone);
 
-                            oJson = response;
-                            if (response.codError === 'Error Inesperado Index: 1, Size: 1') {
-                                modalFactory.error('Siebel no devolvio resultados');
-                            } else {
-                                clientCountry = oJson.country.value;
-                                jsonData.typeDocument = vm.viewModelmoldedFormalization.typeIdentification;
-                                jsonData.numberDocument = vm.viewModelmoldedFormalization.numberIdentification;
-                                /*Si el segundo nombre viene indefinido colocarlo como vacio  */
-                                if (angular.isObject(oJson.secondName)) {
-                                    jsonData.secondName = '';
-                                } else {
-                                    jsonData.secondName = oJson.secondName;
-                                }
+                    /** Validaciones para el tipo de moneda en dolares, donde se ocultan los campos Compra cheques de gerencia */
+                    angular.forEach(vm.typeSex, function (value, key) {
+                        if (value.value === vm.dataClientExit.sex) {
+                            vm.viewModelmoldedFormalization.sex = value.id;
+                        }
+                    });
 
-                                /*Si el segundo apellido viene indefinido colocarlo como vacio  */
-                                if (angular.isObject(oJson.secondLastName)) {
-                                    jsonData.secondSurname = '';
-                                } else {
-                                    jsonData.secondSurname = oJson.secondLastName;
-                                }
+                    /** Validaciones para el tipo de moneda en dolares, donde se ocultan los campos Compra cheques de gerencia */
+                    angular.forEach(vm.nationalities, function (value, key) {
+                        if (value.value === vm.dataClientExit.nacionality) {
+                            vm.viewModelmoldedFormalization.nacionalidad = value.id;
+                        }
+                    });
 
+                    /** Validaciones para el tipo de moneda en dolares, donde se ocultan los campos Compra cheques de gerencia */
+                    angular.forEach(vm.typeStatus, function (value, key) {
+                        if (value.value === vm.dataClientExit.civilState) {
+                            vm.viewModelmoldedFormalization.status = value.id;
+                        }
+                    });
 
-                                /*Si la el telefono de la casa viene indefinido colocarlo como vacio  */
-                                if (angular.isObject(oJson.phone)) {
-                                    jsonData.landLine = '';
-                                } else {
-                                    jsonData.landLine = parseInt(oJson.phone);
-                                }
-
-                                /*Si el email indefinido colocarlo como vacio  */
-                                if (angular.isObject(oJson.email)) {
-                                    jsonData.email = '';
-                                } else {
-                                    jsonData.email = oJson.email;
-                                }
-
-                                /*Si la el telefono móvil viene indefinido colocarlo como vacio  */
-                                if (angular.isObject(oJson.cellphone)) {
-                                    jsonData.mobilePhone = '';
-                                } else {
-                                    jsonData.mobilePhone = parseInt(oJson.cellphone);
-                                }
-
-
-                                /*Guardamos el numero de identidad del cliente para poder borrarlo en el la fabrica del modal de cancelar*/
-                                jsonData.numberIdentification = vm.viewModelmoldedFormalization.identificationName;
-
-                                /*Almacenar los datos extraidos del cliente desde siebel */
-                                jsonData.firtsName = oJson.firstName;
-                                jsonData.surname = oJson.firstLastName;
-                                jsonData.birthDate = oJson.birthDate;
-                                jsonData.sex = oJson.sex;
-                                jsonData.countryBirth = parseInt(oJson.country.id);
-                                jsonData.nationality = parseInt(oJson.nationality.id);
-
-                                /*Si el estado dl cliente viene indefinido colocarlo como vacio  */
-                                if (oJson.city === undefined) {
-                                    jsonData.cityBirth = '';
-                                } else {
-                                    jsonData.cityBirth = parseInt(oJson.city.id);
-                                }
-
-                                /*Recoremos el tipo de documento para capturar el nombre del tipo de documento seleccionado*/
-                                angular.forEach(vm.typeDocuments, function(value, key) {
-                                    if (value.id === vm.viewModelmoldedFormalization.typeIdentification) {
-                                        jsonData.nameTypeIdentification = value.value;
-                                    }
-                                });
-
-                                vm.getBureau = true;
-                                vm.namePlastic2 = jsonData.firtsName + ' ' + jsonData.secondName + ' ' + jsonData.surname + ' ' + jsonData.secondSurname;
-                                vm.landLine = jsonData.mobilePhone;
-                                vm.sex = jsonData.sex;
-                                vm.nationality = jsonData.nationality;
-                                vm.datePassport = jsonData.birthDate;
-                                vm.email = jsonData.email;
-                                vm.myDate = jsonData.birthDate;
-                                vm.bornDay.setRangeText(vm.datePassport.substring(0, 10));
-                                angular.forEach(vm.genderSelect.options, function(value, key) {
-                                    if (value.getAttribute("label") == vm.sex) {
-                                        value.selected = true;
-                                    }
-                                });
-
-                                angular.forEach(vm.nacionalidad.options, function(value) {
-                                    if (value.value.substring(7,12) == vm.nationality) {
-                                        value.selected = true;
-                                    }
-                                });
-
-
-                                localStorage.setItem("jsonDataClient", jsonData)
-                                localStorage.setItem("jsonDataClient", JSON.stringify(jsonData))
-                                jsonData = JSON.parse(localStorage.getItem("jsonDataClient"));
-                                console.log(jsonData);
-                            }
-
-
-
-                            getvalidateClientCreditCard();
-                            validateClientCanContinue();
-                            //validLimiteManteniment();
-                        }, modalError);
-
-
+                    vm.datePassport = vm.dataClientExit.birthDate;
+                    vm.email = vm.dataClientExit.email;
+                    vm.myDate = vm.dataClientExit.birthDate;
+                    vm.bornDay.setRangeText(vm.datePassport.substring(0, 10));
+                    console.log(vm.dataClientExit);
+                      
                     }, modalError);
                 }
+
+                
+
             }, modalError);
         }
 
@@ -849,9 +813,9 @@
         function getPlaces(id) {
             catalogComplexService.getCatalogComplex(id)
                 .then(
-                    function(response) {
-                        vm.places = response.data;
-                    });
+                function (response) {
+                    vm.places = response.data;
+                });
         }
 
         /**
@@ -861,20 +825,20 @@
         function getSectors(id) {
             catalogComplexService.getCatalogComplex(id)
                 .then(
-                    function(response) {
-                        vm.sectors = response.data;
-                    });
+                function (response) {
+                    vm.sectors = response.data;
+                });
         }
 
-        function getCountries() {
+         function getCountries(){
             catalogService.getCatalog(CATALOG.COUNTRIES)
                 .then(
-                    function(response) {
-                        vm.countries = response.data;
-                        vm.countryRd = SELECT_DEFAULT.COUNTRY_RD;
-                    });
+                function (response) {
+                    vm.countries = response.data;
+                    vm.countryRd = SELECT_DEFAULT.COUNTRY_RD;
+                });
         }
-
+        
         /*Llamado de la función para obtener los la lista de paises*/
         getCountries();
 
@@ -886,9 +850,9 @@
         function getMunicipalities(id) {
             catalogComplexService.getCatalogComplex(id)
                 .then(
-                    function(response) {
-                        vm.municipalities = response.data;
-                    });
+                function (response) {
+                    vm.municipalities = response.data;
+                });
         }
         /**
          * Función que carga la lista de ciudades de residencia, dependiendo del pais seleccionado
@@ -897,11 +861,11 @@
         function getCitiesResidences(id) {
             catalogComplexService.getCatalogComplex(id)
                 .then(
-                    function(response) {
-                        vm.citiesResidences = response.data;
-                    });
+                function (response) {
+                    vm.citiesResidences = response.data;
+                });
         }
-
+        
         /**
          * Función que abre el popup del datepicker para la fecha de expedicion del pasaporte
          */
@@ -910,65 +874,81 @@
         }
 
 
-        function validAcen() {
-
-            if (vm.viewModelmoldedFormalization.namePlastic) {
-                var specialChars = "!@#$^&%*()+=-[]\/{}|:<>?,.";
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic, 'ñ', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic, 'á', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic, 'é', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic, 'í', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic, 'ó', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic, 'ú', "");
-
-                function replaceAll(text, busca, reemplaza) {
-                    while (text.toString().indexOf(busca) != -1)
-                        text = text.toString().replace(busca, reemplaza);
-                    vm.viewModelmoldedFormalization.namePlastic = text;
-                    return text;
-
+        function validAcen(){
+           
+           if (vm.viewModelmoldedFormalization.namePlastic){
+               var specialChars = "!@#$^&%*()+=-[]\/{}|:<>?,."; 
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic , 'ñ', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic , 'á', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic , 'é', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic , 'í', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic , 'ó', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic , 'ú', "" );
+                    function replaceAll( text, busca, reemplaza ){
+                    while (text.toString().indexOf(busca) != -1) 
+                            text = text.toString().replace(busca,reemplaza);
+                            vm.viewModelmoldedFormalization.namePlastic= text;
+                            return text;
+                    
                 }
                 if (!/^[a-zA-Z\s]*$/.test(vm.viewModelmoldedFormalization.namePlastic)) {
-                    vm.espresion = true;
-                } else {
+                   vm.espresion = true;
+                }else {
                     vm.espresion = false;
                 }
-            } else {
-                vm.espresion = false;
-            }
+           }else {
+               vm.espresion = false;
+           }
+        
+        } 
 
-        }
-
-        function validAcen2() {
-
-            if (vm.viewModelmoldedFormalization.namePlastic2) {
-                var specialChars = "!@#$^&%*()+=-[]\/{}|:<>?,.";
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic2, 'ñ', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic2, 'á', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic2, 'é', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic2, 'í', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic2, 'ó', "");
-                replaceAll(vm.viewModelmoldedFormalization.namePlastic2, 'ú', "");
-
-                function replaceAll(text, busca, reemplaza) {
-                    while (text.toString().indexOf(busca) != -1)
-                        text = text.toString().replace(busca, reemplaza);
-                    vm.viewModelmoldedFormalization.namePlastic2 = text;
-                    return text;
-
+        function validAcen2(){
+           
+           if (vm.viewModelmoldedFormalization.namePlastic2){
+               var specialChars = "!@#$^&%*()+=-[]\/{}|:<>?,."; 
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic2 , 'ñ', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic2 , 'á', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic2 , 'é', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic2 , 'í', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic2 , 'ó', "" );
+                    replaceAll(vm.viewModelmoldedFormalization.namePlastic2 , 'ú', "" );
+                    function replaceAll( text, busca, reemplaza ){
+                    while (text.toString().indexOf(busca) != -1) 
+                            text = text.toString().replace(busca,reemplaza);
+                            vm.viewModelmoldedFormalization.namePlastic2= text;
+                            return text;
+                    
                 }
                 if (!/^[a-zA-Z\s]*$/.test(vm.viewModelmoldedFormalization.namePlastic2)) {
-                    vm.espresion2 = true;
-                } else {
+                   vm.espresion2 = true;
+                }else {
                     vm.espresion2 = false;
                 }
-            } else {
-                vm.espresion2 = false;
-            }
+           }else {
+               vm.espresion2 = false;
+           }
+        
+        } 
 
+                /**
+         *  @ngdoc function
+         *  @name getTaskYesNo
+         *  @methodOf App.controller:customerForeignCurrencyController
+         *
+         *  @description
+         *  Cargamos los valores de los desplegables 
+         *  Para cuando el cliente desea tarjeta de debito.
+         */
+        function getTaskYesNo() {
+            catalogService.getCatalog(CATALOG.TASK_YES_NO)
+                .then(
+                    function (response) {
+                        vm.optionsYesNo = response.data;
+                        vm.validDebitNo = vm.optionsYesNo[0].id;
+                    }
+                );
         }
-
-
+        getTaskYesNo();
 
         /**
          *  @ngdoc method
@@ -977,14 +957,14 @@
          *
          *  @description
          *  Consulta los tipos de documentos que existen.
-         */
+         */        
         function getTypeSex() {
             catalogService.getCatalog(CATALOG.SEX)
                 .then(
-                    function(response) {
-                        vm.typeSex = response.data;
-                    }
-                );
+                function (response) {
+                    vm.typeSex = response.data;
+                }
+            );
         }
 
         getTypeSex();
@@ -996,45 +976,24 @@
          *
          *  @description
          *  Consulta los tipos de documentos que existen.
-         */
+         */        
         function getTypeDStatus() {
             catalogService.getCatalog(CATALOG.CIVIL_STATUS)
                 .then(
-                    function(response) {
-                        vm.typeStatus = response.data;
-                    }
-                );
+                function (response) {
+                    vm.typeStatus = response.data;
+                }
+            );
         }
 
         getTypeDStatus();
 
-        function modalCancel() {
+        function modalCancel(){
             modalFactory.cancel();
         }
-        // Get the modal
-        var modal = document.getElementById('myModal');
 
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
+  
 
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
 
-        // When the user clicks on the button, open the modal 
-        btn.onclick = function() {
-            modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            modal.style.display = "none";
-        }
-
-        // When the user clicks anywhere outside of the modal, close it
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
     }
 })();

@@ -30,18 +30,38 @@
                 templateUrl: "app/feature/transitionManteniment/transitionView.html",
                 controller: "transitionController as transitionManteniment"
             })
-            .state('transactionCode',{
+             .state('transactionCode',{
                 url: "/transCode",
                 templateUrl: "app/feature/transactionCodeParameterization/transactionView.html",
                 controller: "transactionController as transactionCode"
             })
-            .state('transactionResume',{
-                url: "/resumen",
-                templateUrl: "app/feature/transactionResume/transactionResumeView.html",
-                controller: "transactionResumeController as transactionResume"
+            .state('transactionAffiliate',{
+                url: "/transAff",
+                templateUrl: "app/feature/transactionAffiliate/transactionAffiliateView.html",
+                controller: "transactionAffiliateController as transactionAffiliate"
+            })
+            .state('transactionComerce',{
+                url: "/transCom",
+                templateUrl: "app/feature/transactionComerce/transactionComerceView.html",
+                controller: "transactionComerceController as transactionComerce"
+            })
+            .state('transactionRole',{
+                url: "/transRole",
+                templateUrl: "app/feature/transactionRole/transactionRoleView.html",
+                controller: "transactionRoleController as transactionRole"
+            })
+            .state('formalizationResult',{
+                url: "/result",
+                templateUrl: "app/feature/formalizationResult/formalizationResultView.html",
+                controller: "formalizationResultController as formalizationResult"
             });
 
+
+
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+
+
+
 
     }
 })();

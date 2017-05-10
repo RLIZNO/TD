@@ -24,7 +24,8 @@
             getValidationClient: getValidationClient,
             getvalidateClientCreditCard: getvalidateClientCreditCard,
             getSiebelCustomer: getSiebelCustomer,
-            getValidaClientPortal: getValidaClientPortal
+            getValidaClientPortal: getValidaClientPortal,
+            getValidaFico: getValidaFico
         };
 
         /**
@@ -41,7 +42,8 @@
 
             var deferred = $q.defer();
 
-            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_CREDIT_CARD + '?documentNumber=' + idValue + '&userName=' + userName + '&documentType=' + typeDocumentValue).then(
+            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_CREDIT_CARD + '?documentNumber=' + idValue + '&userName=' + userName + '&documentType=' + typeDocumentValue)
+                .then(
                     function (response) {
                     	if(response.data.success) {
                         	deferred.resolve(response.data.data);
@@ -73,7 +75,8 @@
 
             var deferred = $q.defer();
 
-            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_CLIENT + '?documentType=' + typeDocumentValue + '&documentNumber=' + idValue + '&userName=' + userName).then(
+            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_CLIENT + '?documentType=' + typeDocumentValue + '&documentNumber=' + idValue + '&userName=' + userName)
+                .then(
                     function (response) {
                     	if(response.data.success) {
                         	deferred.resolve(response.data.data);
@@ -85,9 +88,9 @@
                         deferred.reject(error);
                     }
                 );
+
             return deferred.promise;
         }
-    
 
         /**
          *	@ngdoc method
@@ -131,7 +134,36 @@
                 );
         }
 
+        /**
+         *  @ngdoc method
+         *  @description
+         *  Consulta si el usuario existe o no dentro de los clientes del banco.
+         * 
+         *  @param {String} idValue número de indentificacion del cliente.
+         *  @param {String} typeDocumentValue Tipo de documento del cliente.
+         *
+         *  @return {Object} La respuesta del servicio.
+         */
+        function getValidaFico(date, ducumenNumber, typeDocumentValue, typeHousing, housingTime, userName, income) {
 
+            var deferred = $q.defer();
+
+            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_FICO + '?contractDate=' + date + '&documentNumber=' + ducumenNumber + '&documentType=' + typeDocumentValue + '&housingType=' + typeHousing + '&housingTime=' + housingTime + '&userName=' + userName + '&customerIncome=' + income)
+                .then(
+                    function (response) {
+                        if(response.data.success) {
+                            deferred.resolve(response.data.data);
+                        } else {
+                            deferred.reject(response.data.error);
+                        }
+                    },
+                    function (error) {
+                        deferred.reject(error);
+                    }
+                );
+
+            return deferred.promise;
+        }
 
 
         return self;

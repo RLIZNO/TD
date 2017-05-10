@@ -26,8 +26,7 @@
         'saveIdentificationService',
         'messages',
         'addTableService'
-        //'cierreForzosoTCService'
-    ];
+        ];
 
     function validationAccountController(
         sweet,
@@ -48,8 +47,7 @@
         YES_NO,
         saveIdentificationService,
         messages,
-        addTableService
-        //cierreForzosoTCService
+            addTableService
     ) {
         var vm = this;
          /**
@@ -200,6 +198,8 @@
         vm.popupDatePassport = { /*Boolean que abre y cierra el datepicker de fecha de pasaporte */
             opened: false
         };
+
+        var documentNumber = vm.viewModelvalidationAccount.numberIdentification;
         /**
          *  @ngdoc property
          *  @name $rootScope.dataUser.typeDocument
@@ -234,18 +234,19 @@
         vm.cleanLimit3 = cleanLimit3;
         vm.yearValid = yearValid;
         vm.openDatePassport  = openDatePassport;
+        vm.validFico = validFico;
         //console.log($rootScope.globalLimitData);
         $rootScope.globalLimitData={};
 
         function loadCreditCardFirstData(){
-            addTableService.allTable().then(function(responseValue) {
-                //$rootScope.globalLimitData = responseValue.productLimit[0];
-                angular.forEach(responseValue.productLimit, function (value, key) {
-                    if (value.status == "A") {
-                        throw $rootScope.globalLimitData = responseValue.productLimit[key];
-                    }
-                });
-            });
+           addTableService.allTable().then(function(responseValue) {
+               //$rootScope.globalLimitData = responseValue.productLimit[0];
+               angular.forEach(responseValue.productLimit, function (value, key) {
+                   if (value.status == "A") {
+                       throw $rootScope.globalLimitData = responseValue.productLimit[key];
+                   }
+               });
+           });
         }
         loadCreditCardFirstData();
         /**
@@ -255,6 +256,7 @@
             vm.popupDatePassport.opened = true;
         }
 
+        
 
         function yearValid(){
             if (vm.viewModelvalidationAccount.howYear){
@@ -270,7 +272,26 @@
             }
         }
 
-
+        var bin = localStorage.getItem("bin");
+        if (bin === "true") {
+            $state.go('transitionManteniment');
+        }
+        var transacion = localStorage.getItem("transacion");
+        if (transacion === "true") {
+            $state.go('transactionCode');
+        }
+        var afiliados = localStorage.getItem("afiliados");
+        if (afiliados === "true") {
+            $state.go('transactionAffiliate');
+        }
+        var comercio = localStorage.getItem("comercio");
+        if (comercio === "true") {
+            $state.go('transactionComerce');
+        }
+        var reglas = localStorage.getItem("reglas");
+        if (reglas === "true") {
+            $state.go('transactionRole');
+        }
         var validclientTc = localStorage.getItem("validclientTc");
         if (validclientTc === 'validclientTc'){
             $state.go('moldedFormalization');
@@ -502,7 +523,7 @@
          
 
         vm.getdetails = function () {
-            getGlobalLimitRDData();
+           getGlobalLimitRDData();
            vm.espresion = false;
             var LimitCam = vm.viewModelvalidationAccount.limitRD;
             clean(LimitCam , ",", "" );
@@ -554,33 +575,6 @@
             vm.viewModelvalidationAccount.limitRD = $filter('number')(x,0);
             replaceAll(vm.viewModelvalidationAccount.limitRD , ".", "," );
         }
-
-         /*function getGlobalLimitRDData() {
-           //loadCreditCardFirstData();
-           var LimitCam = vm.viewModelvalidationAccount.limitRD;
-           clean(LimitCam , ",", "" );
-
-           function clean( text, busca, reemplaza ){
-               while (text.toString().indexOf(busca) != -1) 
-                       text = text.toString().replace(busca,reemplaza);
-                       LimitCam = text;
-                       return text;  
-               
-           }
-           if (LimitCam != "" ) {
-               if(LimitCam < $rootScope.globalLimitData.minimumLimitRD){
-                   modalFactory.warning(messages.modals.error.minLimitRD + $rootScope.globalLimitData.minimumLimitRD);
-               } else {
-                   if (LimitCam > $rootScope.globalLimitData.maximumLimitRD) {
-                      modalFactory.warning(messages.modals.error.maxLimitRD + $rootScope.globalLimitData.maximumLimitRD); 
-                   }
-               }           
-           }  else {
-               modalFactory.warning(messages.modals.warning.modalEmptyField);
-           } 
-       }*/
-
-
 
         function getGlobalLimitRDData() {
             //loadCreditCardFirstData();
@@ -729,6 +723,88 @@
         
 
 
+        function validFico() {
+
+        if(vm.formValidationAccountPre.$valid){
+            var date = $filter('date')(vm.viewModelvalidationAccount.datePassport,'dd-MM-yyyy');
+            var ducumenNumber = vm.viewModelvalidationAccount.numberIdentification;
+            var typeDocumentValue = vm.viewModelvalidationAccount.typeIdentification;
+            var typeHousing = vm.viewModelvalidationAccount.livingPlace;
+            var housingTime = vm.viewModelvalidationAccount.howYear;
+            
+                var income = vm.viewModelvalidationAccount.monthyIncome;
+                clean(income , ",", "" );
+
+                function clean( text, busca, reemplaza ){
+                    while (text.toString().indexOf(busca) != -1) 
+                            text = text.toString().replace(busca,reemplaza);
+                            income = text;
+                            return text;  
+                 }
+
+
+            validationClientService.getValidaFico(date, ducumenNumber, typeDocumentValue, typeHousing, housingTime, vm.username, income).then(function (response) {
+                        
+                console.log(response);
+                function limitUSD( text, busca, reemplaza ){
+                            while (text.toString().indexOf(busca) != -1) {
+                                    text = text.toString().replace(busca,reemplaza);
+                                    vm.viewModelvalidationAccount.limitUSD = text;
+                                    return text; 
+                            }
+                    }
+
+                    function limitRD( text, busca, reemplaza ){
+                            while (text.toString().indexOf(busca) != -1) {
+                                    text = text.toString().replace(busca,reemplaza);
+                                    vm.viewModelvalidationAccount.limitRD = text;
+                                    return text; 
+                            }
+                    }
+
+                    function limitDiferidoRD( text, busca, reemplaza ){
+                            while (text.toString().indexOf(busca) != -1) {
+                                    text = text.toString().replace(busca,reemplaza);
+                                    vm.viewModelvalidationAccount.limitDiferidoRD = text;
+                                    return text; 
+                            }
+                    }
+
+                vm.viewModelvalidationAccount.limitDiferidoRD = response.deferred;
+                vm.viewModelvalidationAccount.limitDiferidoRD = $filter('number')(response.deferred,0);
+                limitDiferidoRD(vm.viewModelvalidationAccount.limitDiferidoRD , ".", "," );
+
+                vm.viewModelvalidationAccount.limitRD = response.dopLimit;
+                vm.viewModelvalidationAccount.limitRD = $filter('number')(response.dopLimit,0);
+                limitRD(vm.viewModelvalidationAccount.limitRD , ".", "," );
+                
+                vm.viewModelvalidationAccount.limitUSD =  response.usdLimit;
+                vm.viewModelvalidationAccount.limitUSD = $filter('number')(response.usdLimit,0);
+                limitUSD(vm.viewModelvalidationAccount.limitUSD , ".", "," );
+                vm.decisionMessage = response.decision;
+                vm.decisionMoti = response.motive;
+                vm.disablePre = false;
+
+                if (response.decision === 'Rechazado') {
+                    vm.clientCanContinue =  false;
+                    modalFactory.error(response.motive);
+                }
+
+                if (response.decision === 'Aprobado') {
+                    vm.clientCanContinue =  true;
+                }
+                
+            }, modalError);
+        }else {
+            //Chequea que todos los campos obligatorios esten llenos sean validos.
+
+             vm.submittedPre = true;
+             vm.disablePre = true;
+             vm.formNewInvalid =  true;
+            modalFieldsRequired();
+        }
+
+        }
 
         var jsonData = {}
          /**
@@ -742,6 +818,7 @@
         function resetData() {
             vm.ageAllowed = false;
             vm.clientCanContinue = false;
+            vm.disablePre = true;
             vm.findControlListReport = false;
             vm.findJudicialEvaluation = false;
             vm.validpreAprobado = false;
@@ -749,9 +826,13 @@
             vm.findPep = false;
             vm.getBureau = false;
             vm.clientUser = '';
-                    vm.viewModelvalidationAccount.limitDiferidoRD = '';
-                    vm.viewModelvalidationAccount.limitRD = '';
-                    vm.viewModelvalidationAccount.limitUSD = '';
+            vm.viewModelvalidationAccount.limitDiferidoRD = '';
+            vm.viewModelvalidationAccount.limitRD = '';
+            vm.viewModelvalidationAccount.limitUSD = '';
+            vm.viewModelvalidationAccount.livingPlace = '';
+            vm.viewModelvalidationAccount.howYear = '';
+            vm.viewModelvalidationAccount.datePassport = '';
+            vm.viewModelvalidationAccount.monthyIncome = '';
             vm.decisionMoti = '';
             vm.decisionMessage = '';
             vm.limiteMaximoRd = '';
@@ -797,20 +878,6 @@
                 }
 
             }, modalError);
-
-            /*var getJsonCierreForz = localStorage.getItem('JSON');
-            var docNumUserCierreForz = JSON.parse(getJsonCierreForz);
-            var t = docNumUserCierreForz.documentNumber;*/
-
-            /*addTableService.getcierreForzosoTC(documentNumber).then(
-                function (response) {   
-                    if(response.success == true ){
-                        window.location.href = "#/form";
-                    }
-                });*/  
-
-            
-
         }
 
         /**
@@ -1331,8 +1398,8 @@
                         var dataSiebel = false;
                         localStorage.setItem("dataSiebel", dataSiebel);
                         localStorage.setItem("validclientTc", validclientTc);
-                        //window.location.href = "/wps/portal/ptd/inicio";
-                        window.location.href = "../index.html";
+                        window.location.href = "/wps/portal/ptd/inicio";
+                        //window.location.href = "../index.html";
                     }, 0);
                 });
             }
@@ -1375,8 +1442,8 @@
                             localStorage.setItem("dataSiebel", dataSiebel);
                             var validclientTc = 'validclientTc';
                             localStorage.setItem("validclientTc", validclientTc);
-                            //window.location.href = "/wps/portal/ptd/inicio";
-                            window.location.href = "../index.html";
+                            window.location.href = "/wps/portal/ptd/inicio";
+                            //window.location.href = "../index.html";
                         }, modalError); 
 
             }
@@ -1476,8 +1543,8 @@
             if(error.message !== '') {
                 var errortc = error.message;
                 if(error.message === "Cliente no posee preaprobado." ){
-                    vm.decisionMessage = 'PRE-APROBADO';
-                    vm.clientCanContinue =  true;
+                    vm.decisionMessage = '';
+                    vm.clientCanContinue =  false;
                     vm.validpreAprobado = true;
                 }
                 if(error.message === "El cliente ya posee el producto." ){
@@ -1515,6 +1582,11 @@
          */
         function modalCancel() {
            modalFactory.cancel();
+        }
+
+        /*Funcion para abrir el modal de campos obligatorios*/
+        function modalFieldsRequired () {
+            modalFactory.warning(messages.modals.error.completeRequiredFields);
         }
         /**
          *  @ngdoc method

@@ -4,16 +4,16 @@
 
     angular
         .module('app')
-        .service('addTableService', addTableService);
+        .service('addTableAffliateService', addTableAffliateService);
 
-    addTableService.$inject = [
+    addTableAffliateService.$inject = [
         '$http',
         '$q',
         'PREFIX_URL',
         'URL'
     ];
 
-    function addTableService(
+    function addTableAffliateService(
         $http,
         $q,
         PREFIX_URL,
@@ -21,9 +21,9 @@
     ) {
 
         var service = {
-            addManteniment: addManteniment,
-            allTable: allTable,
-            updateManteniment: updateManteniment
+            updateMantenimentAffiliate: updateMantenimentAffiliate,
+            InsertAffiliate: InsertAffiliate,
+            insertComerce: insertComerce
         };
 
         return service;
@@ -38,30 +38,8 @@
          *
          *	@return {Object} array que devuelve los objetos con sus filas afectadas.
          */
-        function addManteniment(json) {
-            $http.post(PREFIX_URL.SERVICES + URL.ADD_TABLE_MANTENIMENT, json)
-                .then(
-                    function (response) {
-                        return response.data;
-                    },
-                    function (errResponse) {
-                        return $q.reject(errResponse);
-                    }
-                );
-        }
-
-                /**
-         *	@ngdoc method
-         *	@description
-         *	Actualiza los datos del cliente en siebel.
-         * 
-         *	@param {Object} objeto con la información de los datos del cliente a actualizar. 
-         * 
-         *
-         *	@return {Object} array que devuelve los objetos con sus filas afectadas.
-         */
-        function updateManteniment(json) {
-            $http.put(PREFIX_URL.SERVICES + URL.UPDATE_TABLE, json)
+        function updateMantenimentAffiliate(json) {
+            $http.post(PREFIX_URL.SERVICES + URL.UPDATE_TABLE_AFF, json)
                 .then(
                     function (response) {
                         return response.data;
@@ -75,28 +53,47 @@
         /**
          *	@ngdoc method
          *	@description
-         *	Consulta los datos desde sebeal.
+         *	Actualiza los datos del cliente en siebel.
+         * 
+         *	@param {Object} objeto con la información de los datos del cliente a actualizar. 
+         * 
          *
-         *	@return {Object} La respuesta del servicio.
+         *	@return {Object} array que devuelve los objetos con sus filas afectadas.
          */
-        function allTable() {  
-
-            var deferred = $q.defer();
-
-            $http.get(PREFIX_URL.SERVICES + URL.ALL_TABLE)
+        function InsertAffiliate(json) {
+            $http.post(PREFIX_URL.SERVICES + URL.INSERT_TABLE_AFF, json)
                 .then(
                     function (response) {
-                            deferred.resolve(response.data);
+                        return response.data;
                     },
-                    function (error) {
-                        deferred.reject(error);
+                    function (errResponse) {
+                        return $q.reject(errResponse);
                     }
                 );
-
-            return deferred.promise;
         }
 
 
+        /**
+         *  @ngdoc method
+         *  @description
+         *  Actualiza los datos del cliente en siebel.
+         * 
+         *  @param {Object} objeto con la información de los datos del cliente a actualizar. 
+         * 
+         *
+         *  @return {Object} array que devuelve los objetos con sus filas afectadas.
+         */
+        function insertComerce(json) {
+            $http.post(PREFIX_URL.SERVICES + URL.INSERT_TABLE_COM, json)
+                .then(
+                    function (response) {
+                        return response.data;
+                    },
+                    function (errResponse) {
+                        return $q.reject(errResponse);
+                    }
+                );
+        }
 
     }
 

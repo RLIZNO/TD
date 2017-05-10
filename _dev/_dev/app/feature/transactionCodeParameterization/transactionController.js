@@ -9,22 +9,24 @@
 	 	'sweet',
 	 	'$state',
 	 	'URL',
+    '$rootScope',
 	 	'addCodeService',
+    '$timeout',
 	 	'messages',
 	 	'modalFactory',
-        'catalogService',
-        '$timeout'
+        'catalogService'
 	];
 
 	function transactionController(
 		sweet,
 		$state,
 		URL,
+    $rootScope,
 		addCodeService,
+    $timeout,
 		messages,
 		modalFactory,
-        catalogService,
-        $timeout
+        catalogService
 	){
 		var vm = this;	
 		vm.viewModelTransaction = {};
@@ -40,7 +42,40 @@
 		vm.addProduct   = addProduct;
 		vm.viewJobsData = viewJobsData;
 		vm.editJobsData = editJobsData;
-        vm.statusButton = statusButton;
+    vm.statusButton = statusButton;
+    vm.modalCancel = modalCancel;
+
+        /**
+         *  @ngdoc method
+         *  @name modalCancel
+         *  @methodOf App.controller:creationAccountController
+         *
+         *  @description
+         *  Función que abre el modal para cancelar la operación en proceso y te redirecciona al home
+         */
+        function modalCancel() {
+            sweet.show({
+                title: messages.modals.warning.modaltitleWarning,
+                text: messages.modals.warning.modalCancelprocessGR,
+                type: messages.modals.warning.modalTypeWarning,
+                showCancelButton: true,
+                cancelButtonText: messages.modals.warning.modalCancelButton,
+                confirmButtonColor: messages.modals.warning.modalColorButton,
+                confirmButtonText: messages.modals.warning.modalConfirText,
+                closeOnConfirm: true
+            }, function () {
+                $timeout(function () {
+                    if(angular.isDefined($rootScope.customerDataCredit) && angular.isDefined($rootScope.customerDataCredit.numberIdentification)){
+                        deleteCustomerService.deleteCustomer($rootScope.customerDataCredit.numberIdentification);
+                    }
+                    
+                    var transacion = false; 
+                    localStorage.setItem("transacion", transacion);
+                    window.location.href = "/wps/portal/ptd/gruporamos/gruporamos/";
+                }, 0);
+            });
+        }
+
  
 		addCodeService.allTable().then(
         function (response) {
@@ -69,42 +104,40 @@
         });
 
         function addProduct(){ 
-             vm.submitted = false;
-             if(vm.formTransactionCode.$valid){ 
-                    var json = {};
-                    vm.viewModelTransaction.userCreated = 'cavs';
-                    json = vm.viewModelTransaction;
-                    repeatProduct(); 
-                    // si no hay campos repetidos ejecuta la funcion
-                    if (vm.repeatFields) {
-                        modalFactory.warning(messages.modals.error.modalRepeatFields);
-                        vm.repeatFields = false;
-                    } else {
-                        addCodeService.addManteniment(json);                
-                        vm.viewModelTransaction = {};
-                        /*Volvemos el formulario a estado inicial del touched */
-                        vm.formTransactionCode.$setUntouched();
-                        /*Volvemos el formulario a estado inicial del setPristine,
-                         para validar que el usuario no halla interactuado con el formulario*/
-                        vm.formTransactionCode.$setPristine();
-                        /*Volvemos el boolean que valida si la fuente de ingreso se encuentra disponible para editar */
-                        //vm.buttonEdit = false; 
-                        modalFactory.success(messages.modals.success.productSuccess);
-                    }   
-            }else{
-                  //Chequea que todos los campos obligatorios esten llenos sean validos.
-                 vm.submitted = true;
-                 modalFieldsRequired();
-            }
-            setTimeout(function updateTable(){
-                addCodeService.allTable().then(
-                    function (response) {
-                        vm.tableSourceProdcut = response.data.transList;
-                    });
-            },1000);
-        }
-
-        
+            vm.submitted = false;
+            if(vm.formTransactionCode.$valid){ 
+                   var json = {};
+                   vm.viewModelTransaction.userCreated = 'cavs';
+                   json = vm.viewModelTransaction;
+                   repeatProduct();
+                   // si no hay campos repetidos ejecuta la funcion
+                   if (vm.repeatFields) {
+                       modalFactory.warning(messages.modals.error.modalRepeatFields);
+                       vm.repeatFields = false;
+                   } else {
+                       addCodeService.addManteniment(json);                
+                       vm.viewModelTransaction = {};
+                       /*Volvemos el formulario a estado inicial del touched */
+                       vm.formTransactionCode.$setUntouched();
+                       /*Volvemos el formulario a estado inicial del setPristine,
+                        para validar que el usuario no halla interactuado con el formulario*/
+                       vm.formTransactionCode.$setPristine();
+                       /*Volvemos el boolean que valida si la fuente de ingreso se encuentra disponible para editar */
+                       //vm.buttonEdit = false; 
+                       modalFactory.success(messages.modals.success.productSuccess);
+                   }   
+           }else{
+                 //Chequea que todos los campos obligatorios esten llenos sean validos.
+                vm.submitted = true;
+                modalFieldsRequired();
+           }
+           setTimeout(function updateTable(){
+               addCodeService.allTable().then(
+                   function (response) {
+                       vm.tableSourceProdcut = response.data.transList;
+                   });
+           },1000);
+       }
 
         /**
         *

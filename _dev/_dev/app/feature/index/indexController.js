@@ -69,7 +69,7 @@
          *  Valida si el usuario tiene permisos para crear cliente y cuenta.
          */
 
-        $timeout(function () {
+       /* $timeout(function () {
             
             validationUserService.getValidationUser(vm.userName)
                 .then(
@@ -85,7 +85,7 @@
                     
                 }
                 );
-        }, 0);
+        }, 0); */
 
             var validclientTc = localStorage.getItem("validclientTc");
             if (validclientTc === 'validclientTc'){

@@ -4,16 +4,16 @@
 
     angular
         .module('app')
-        .service('addCodeService', addCodeService);
+        .service('addTableBinService', addTableBinService);
 
-    addCodeService.$inject = [
+    addTableBinService.$inject = [
         '$http',
         '$q',
         'PREFIX_URL',
         'URL'
     ];
 
-    function addCodeService(
+    function addTableBinService(
         $http,
         $q,
         PREFIX_URL,
@@ -21,10 +21,9 @@
     ) {
 
         var service = {
-            addManteniment: addManteniment,
-            allTable: allTable,
-            updateManteniment: updateManteniment,
-            updateRole: updateRole
+            updateMantenimentBin: updateMantenimentBin,
+            InsertBin: InsertBin,
+            insertRole: insertRole
         };
 
         return service;
@@ -39,53 +38,8 @@
          *
          *	@return {Object} array que devuelve los objetos con sus filas afectadas.
          */
-        function addManteniment(json) {
-            $http.post(PREFIX_URL.SERVICES + URL.ADD_CODE_PARAM, json)
-                .then(
-                    function (response) {
-                        return response.data;
-                    },
-                    function (errResponse) {
-                        return $q.reject(errResponse);
-                    }
-                );
-        }
-
-                /**
-         *	@ngdoc method
-         *	@description
-         *	Actualiza los datos del cliente en siebel.
-         * 
-         *	@param {Object} objeto con la información de los datos del cliente a actualizar. 
-         * 
-         *
-         *	@return {Object} array que devuelve los objetos con sus filas afectadas.
-         */
-        function updateRole(json) {
-            $http.post(PREFIX_URL.SERVICES + URL.UPDATE_ROLE, json)
-                .then(
-                    function (response) {
-                        return response.data;
-                    },
-                    function (errResponse) {
-                        return $q.reject(errResponse);
-                    }
-                );
-        }
-
-
-                        /**
-         *  @ngdoc method
-         *  @description
-         *  Actualiza los datos del cliente en siebel.
-         * 
-         *  @param {Object} objeto con la información de los datos del cliente a actualizar. 
-         * 
-         *
-         *  @return {Object} array que devuelve los objetos con sus filas afectadas.
-         */
-        function updateManteniment(json) {
-            $http.post(PREFIX_URL.SERVICES + URL.UPDATE_CODE_PARAM, json)
+        function updateMantenimentBin(json) {
+            $http.post(PREFIX_URL.SERVICES + URL.UPDATE_TABLE_BIN, json)
                 .then(
                     function (response) {
                         return response.data;
@@ -99,27 +53,46 @@
         /**
          *	@ngdoc method
          *	@description
-         *	Consulta los datos desde sebeal.
+         *	Actualiza los datos del cliente en siebel.
+         * 
+         *	@param {Object} objeto con la información de los datos del cliente a actualizar. 
+         * 
          *
-         *	@return {Object} La respuesta del servicio.
+         *	@return {Object} array que devuelve los objetos con sus filas afectadas.
          */
-        function allTable() {
-
-            var deferred = $q.defer();
-
-            $http.get(PREFIX_URL.SERVICES + URL.ALL_CODE_PARAM)
+        function InsertBin(json) {
+            $http.post(PREFIX_URL.SERVICES + URL.INSERT_TABLE_BIN, json)
                 .then(
                     function (response) {
-                            deferred.resolve(response.data);
+                        return response.data;
                     },
-                    function (error) {
-                        deferred.reject(error);
+                    function (errResponse) {
+                        return $q.reject(errResponse);
                     }
                 );
-
-            return deferred.promise;
         }
 
+                /**
+         *  @ngdoc method
+         *  @description
+         *  Actualiza los datos del cliente en siebel.
+         * 
+         *  @param {Object} objeto con la información de los datos del cliente a actualizar. 
+         * 
+         *
+         *  @return {Object} array que devuelve los objetos con sus filas afectadas.
+         */
+        function insertRole(json) {
+            $http.post(PREFIX_URL.SERVICES + URL.INSERT_TABLE_ROLE, json)
+                .then(
+                    function (response) {
+                        return response.data;
+                    },
+                    function (errResponse) {
+                        return $q.reject(errResponse);
+                    }
+                );
+        }
 
 
     }

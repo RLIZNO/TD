@@ -11,6 +11,8 @@
             TASK_YES_NO : 23,
             TYPE_LIVING : 61,
             SEX : 15,
-            CIVIL_STATUS: 16
+            TYPE_DOCUMENTS_ONBASE : 67,
+            CIVIL_STATUS: 16,
+            NATIONALITIES: 13
         });
 })();

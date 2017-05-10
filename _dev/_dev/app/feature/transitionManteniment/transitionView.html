@@ -1,13 +1,13 @@
      <div id="titulo">
         <div id="contenedortitulo">
           <div id="topepanel">
-            <h2>Mantenimiento de Transacciones</h2>
+            <h2>Mantenimiento de Bines y Código de Producto</h2>
           </div>
           <!--fin area tope panel-->
           <div class="breadcrumbs">
             <ul>
-              <li><a href="#">Dashboard / </a></li>
-              <li>Mantenimiento de Transacciones</li>
+              <li><a  ng-click="transitionManteniment.modalCancel()">Dashboard / </a></li>
+              <li>Mantenimiento de Bines y Código de Producto</li>
             </ul>
           </div>
         </div>
@@ -23,113 +23,195 @@
               <h2>Mantenimiento</h2>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div class="mantenimiento"> <span class="label">Código Origen</span> 
-                <span class="input2">
+              <div class="mantenimiento"> <span class="label">Número de BIN</span> 
+                <span class="input">
                         <input  type="text" 
-                          name="codeOrigin" 
-                          ng-model="transitionManteniment.viewModelTransition.codeOrigin" 
-                          ng-class="{ 'hasError': (transitionManteniment.submitted || 
-                                    transitionManteniment.formProductManteniment.codeOrigin.$touched) && 
-                                    transitionManteniment.formProductManteniment.codeOrigin.$invalid}"
-                          ng-maxlength="20"
-                          ng-required="true" />
-                          <span 
-                            class="alerttext" 
-                            ng-if="transitionManteniment.formProductManteniment.codeOrigin.$error.required &&  
-                                  (transitionManteniment.submitted || transitionManteniment.formProductManteniment.codeOrigin.$touched)"
-                            >Este campo es obligatorio
-                        </span>
+                          name="bin" 
+                          ng-model="transitionManteniment.viewModelTransition.bin"
+                          ng-maxlength="20" />
                 </span>
-                <span class="label">Código Transacción</span>
+              </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="mantenimiento">
+                <span class="label">Código Producto</span>
                  <span class="input2">
                          <input  type="text" 
-                          name="transiCode" 
-                          ng-model="transitionManteniment.viewModelTransition.transiCode" 
-                          ng-class="{ 'hasError': (transitionManteniment.submitted || 
-                                    transitionManteniment.formProductManteniment.transiCode.$touched) && 
-                                    productManteniment.formProductManteniment.transiCode.$invalid}"
-                          ng-maxlength="20"
-                          ng-required="true" />
-                          <span 
-                            class="alerttext" 
-                            ng-if="transitionManteniment.formProductManteniment.transiCode.$error.required &&  
-                                  (transitionManteniment.submitted || transitionManteniment.formProductManteniment.transiCode.$touched)"
-                            >Este campo es obligatorio
-                </span> 
+                          name="productCode" 
+                          ng-model="transitionManteniment.viewModelTransition.productCode"
+                          ng-maxlength="6"/>
+                 </span>
                 
-                 </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div class="mantenimiento"> <span class="label">Descripción</span> <span class="input">
-              <input name="" type="text" />
-                </span>  </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div class="mantenimiento"><span class="label">Tipo de Transacción</span> <span class="input2">
-                <select name="">
-                 <option>Consumo</option>
-                 <option>Reverso</option>
-               </select>
-                </span> 
-                 <span class="label">Moneda</span> <span class="input2">
-               <select name="" style="width:75px">
-                 <option>RD$</option>
-                 <option>US$</option>
-               </select>
-                </span> 
+                <span class="label">Producto</span> 
+                <span class="input2">
+                        <input  type="text" 
+                          name="productName" 
+                          ng-model="transitionManteniment.viewModelTransition.productName"
+                          ng-maxlength="20" />
+                    </span>  
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div class="mantenimiento"><span class="label">Tipo de Producto</span> <span class="input2">
-                <select name="">
-                 <option>Tarjeta de Crédito</option>
-                 <option>Línea de Crédito</option>
-               </select>
-                </span> 
-                 <span class="label">Estatus</span> <span class="input2">
-               <select name="" style="width:75px">
-                 <option>Activo</option>
-                 <option>Inactivo</option>
-               </select>
-                </span> 
+              <div class="mantenimiento addTow" ng-if="transitionManteniment.buttonEdit">
+                <span class="label">Tipo de Producto</span>
+                 <span class="input2">
+                         <input  type="text" 
+                          name="productType" 
+                          ng-model="transitionManteniment.viewModelTransition.productType" 
+                          ng-maxlength="20"/>
+                 </span>
+                
+                <span class="label">Status</span> 
+                <span class="input2">
+                        <input  type="text" 
+                          name="status" 
+                          ng-model="transitionManteniment.viewModelTransition.status" 
+                          ng-maxlength="20" />
+                    </span>  
                 </div>
             </div>
-            <div class="botonarearight"> <a href="#" class="boton btnlager btnblack">Filtrar</a></div>
+           
+
+              <div class="botonarearight" ng-show="!transitionManteniment.buttonEdit"> 
+                    <button
+                        class="boton btnlager btnblack"                        
+                        ng-click="transitionManteniment.seachJobsData()">Filtrar
+                    </button>
+              </div>
+
+              <div class="botonarearight" ng-show="transitionManteniment.buttonEdit"> 
+                    <button
+                        class="boton btnlager btnblack"                        
+                        ng-click="transitionManteniment.editJobsData(transitionManteniment.idSourceIncome)">Modificar Producto
+                    </button>
+              </div>
           </div>
           </form>
-<span class="separador">
+          
+          <span class="separador">
           <hr />
           </span>
           <div class="campomantenimientofull">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td class="gridsub" colspan="10">Listados de Productos <a href="" class="boton2 btn btnblue">Nuevo</a></td>
+               <td class="gridsub" colspan="10">Listados de Productos 
+                  <button  ng-click="transitionManteniment.addNewBin()" id="myBtn" class="boton2 btn btnblu">Nuevo</button></td>
               </tr>
-              <tr class="grid_title">
-              <td style="width:5%"></td>
-              <td style="width:10%" class="tablecenter" >Código origen</td>
-              <td style="width:10%" class="tablecenter">Código transacción </td>
-              <td style="width:15%">Tipo de transacción </td>
-              <td style="width:10%" class="tablecenter">Moneda </td>
-              <td style="width:10%" class="tablecenter" >Tipo de producto </td>
-              <td style="width:10%" class="tablecenter">Status </td>
-              <td style="width:20%" class="ultimo"></td>
-              </tr>
-              <tr class="grid_text">
+                <tr class="grid_title" ng-if="transitionManteniment.tableSourceProdcut[0] !== undefined">
+                <td style="width:5%"></td>
+                <td style="width:10%" class="tablecenter"  >BIN</td>
+                <td style="width:10%" class="tablecenter">Código de Producto </td>
+                <td style="width:20%">Tipo de Producto </td>
+                <td style="width:25%" >Producto </td>
+                <td style="width:10%" class="tablecenter">Status </td>
+                <td style="width:20%" class="ultimo"></td>
+                </tr>
+                <tr class="grid_text"
+                   ng-if="transitionManteniment.tableSourceProdcut[0] !== undefined"
+                   ng-repeat="table in transitionManteniment.tableSourceProdcut">
                 <td class="tablecenter" >1</td>
-                <td  class="tablecenter">1</td>
-                <td class="tablecenter">Compras</td>
-                <td>Consumo</td>
-                <td class="tablecenter">RD$</td>
-                <td class="tablecenter">Tarjeta de crédito</td>
-                <td  class="tablecenter">Activo</td>
-                <td><a href="#" class="boton">Editar</a> <a href="#"  class="boton">Cancelar</a></td>
-              </tr>
-              
+                <td class="tablecenter" ng-bind="table.bin"></td>
+                <td class="tablecenter" ng-bind="table.productCode"></td>
+                <td ng-bind="table.productType"></td>
+                <td ng-bind="table.productName"></td>
+                <td ng-bind="table.status" class="tablecenter"></td>
+                <td>
+                  <button class="boton" 
+                          ng-click="transitionManteniment.viewJobsData($index)">
+                          Editar
+                  </button> 
+                  <button class="boton"
+                          ng-click="transitionManteniment.deleteJobsData($index)">
+                          Cancelar
+                  </button>
+                </td>
+                </tr>
             </table>
             
           </div>
-          
+        <div id="myModal" class="modal w3-animate-opacity">
+
+        <!-- Modal content -->
+          <span class="close w3-animate-opacity"></span>
+          <div class="w3-modal-content w3-card-4">
+          <form name="transitionManteniment.formProductMantenimentNew" id="myForm" novalidate role="form">
+              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 campomantenimiento">
+                <div class="divheader">
+                  <h2>Agregar un nuevo Bin y Código de Producto</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="mantenimiento">
+
+                    <span class="label">Número de BIN</span> 
+                    <span class="input2">
+                            <input  type="text" 
+                              name="binNew" 
+                              ng-model="transitionManteniment.viewModelTransitionNew.binNew" 
+                              ng-class="{ 'hasError': (transitionManteniment.submitted || 
+                                        transitionManteniment.formProductMantenimentNew.binNew.$touched) && 
+                                        transitionManteniment.formProductMantenimentNew.binNew.$invalid}"
+                              ng-maxlength="20"
+                              ng-required="true" />
+                    </span>
+
+                    <span class="label">Producto</span> 
+                    <span class="input2">
+                            <input  type="text" 
+                              name="productNameNew" 
+                              ng-model="transitionManteniment.viewModelTransitionNew.productNameNew" 
+                              ng-class="{ 'hasError': (transitionManteniment.submitted || 
+                                        transitionManteniment.formProductMantenimentNew.productNameNew.$touched) && 
+                                        transitionManteniment.formProductMantenimentNew.productNameNew.$invalid}"
+                              ng-maxlength="20"
+                              ng-required="true" />
+                        </span>  
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <div class="mantenimiento">
+                    <span class="label">Tipo de Producto</span>
+                     <span class="input2">
+                             <input  type="text" 
+                              name="productTypeNew" 
+                              ng-model="transitionManteniment.viewModelTransitionNew.productTypeNew" 
+                              ng-class="{ 'hasError': (transitionManteniment.submitted || 
+                                        transitionManteniment.formProductMantenimentNew.productTypeNew.$touched) && 
+                                        transitionManteniment.formProductMantenimentNew.productTypeNew.$invalid}"
+                              ng-maxlength="20"
+                              ng-required="true" />
+                     </span>
+                    
+                    <span class="label">Código Transacción</span>
+                     <span class="input2">
+                             <input  type="text" 
+                              name="productCodeNew" 
+                              ng-model="transitionManteniment.viewModelTransitionNew.productCodeNew" 
+                              ng-class="{ 'hasError': (transitionManteniment.submitted || 
+                                        transitionManteniment.formProductMantenimentNew.productCodeNew.$touched) && 
+                                        transitionManteniment.formProductMantenimentNew.productCodeNew.$invalid}"
+                              ng-maxlength="20"
+                              ng-required="true" />
+                     </span>
+                    </div>
+                </div>
+               
+                <div ng-if="transitionManteniment.formNewInvalid" class="formNewInvalid">Debes completar todos los campos</div>
+                  <div class="botonareacenterNew" > 
+                        <button
+                            class="boton btnlager btnblue positionBtn"                        
+                            ng-click="transitionManteniment.addJobsData()">Guardar Producto
+                        </button>
+                  </div>
+              </div>
+          </form>
+          </div>
+      </div>
+          <div class="botonareacenter">
+            <button ng-click="transitionManteniment.modalCancel()" 
+                  class="boton3 btnlager2 btnred" >
+                  Volver a Dashboard
+            </button>
+         </div>
           
           <!--Inicio Area footer-->
           <!--Fin Area mantenimientos--> 

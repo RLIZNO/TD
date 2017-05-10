@@ -99,16 +99,6 @@
                 );
         }
 
-        /*function addManteniment(json) {
-            $http.post(PREFIX_URL.SERVICES + URL.ADD_CODE_PARAM, json)
-                .success(function (response) {
-                    return response.data;
-                })
-                .error(function (errResponse) {
-                    return $q.reject(errResponse);
-                });
-        }*/
-
                 /**
          *	@ngdoc method
          *	@description

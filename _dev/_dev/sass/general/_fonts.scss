@@ -14,9 +14,9 @@
     }
 }
 
-@include newFont('roboto','roboto_condensedbold','robotocondensed-bold-webfont');
-@include newFont('roboto','roboto_condensedbold_italic','robotocondensed-bolditalic-webfont');
-@include newFont('roboto','roboto_condenseditalic','robotocondensed-italic-webfont');
-@include newFont('roboto','roboto_condensedlight','robotocondensed-light-webfont');
-@include newFont('roboto','roboto_condensedlight_italic','robotocondensed-lightitalic-webfont');
-@include newFont('roboto','roboto_condensedregular','robotocondensed-regular-webfont');
+@include newFont('roboto','roboto_condensedbold','opensans-bold-webfont');
+@include newFont('roboto','roboto_condensedbold_italic','opensans-bolditalic-webfont');
+@include newFont('roboto','roboto_condenseditalic','opensans-italic-webfont');
+@include newFont('roboto','roboto_condensedlight','opensans-light-webfont');
+@include newFont('roboto','roboto_condensedlight_italic','opensans-lightitalic-webfont');
+@include newFont('roboto','roboto_condensedregular','opensans-regular-webfont');

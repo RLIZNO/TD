@@ -12,11 +12,16 @@
         'formalizationModule',
         'validationAccountModule',
         'indexModule',
+        'transactionModule',
         'transitionModule',
-        'transactionResModule',
-        'transactionModule'
+        'transactionAffiliateModule',
+        'transactionComerceModule',
+        'transactionRoleModule',
+        'formalizationResultModule',
+
+
         //module components
-        //'uploadOnBaseModule'
+        'uploadOnBaseModule'
 
     ]).run([
         'messages',

@@ -13,7 +13,7 @@
             VALIDATE_CLIENT : '/BHDL_TDPD_Back_Customers/rest/validationClient/validateClient',
             PRELOADED_CATALOGS : '/BHDL_TDPD_Back_Utils/rest/catalogs/retrievePreloadedCatalogs',
             CATALOGS : '/BHDL_TDPD_Back_Utils/rest/catalogs/retrieveCatalogs',
-            CATALOGS_COMPLEX : 'c',
+            CATALOGS_COMPLEX : '/BHDL_TDPD_Back_Utils/rest/catalogs/retrieveComplexCatalogs',
             XML_BUREAU : '/BHDL_TDPD_Back_Customers/rest/validationCreditBureau/retrieveXMLCreditBureau',
             EXISTING_CLIENT : '/BHDL_TDPD_Back_Customers/rest/siebelClient/getSiebelClient',
             DELETE_XML_BUREAU : '/BHDL_TDPD_Back_Customers/rest/validationCreditBureau/deleteXMLCreditBureau',
@@ -48,15 +48,28 @@
             VALIDD_CUSTOMER_SIEBEL: '/BHDL_TDPD_Back_Customers/rest/siebelClient/getSiebelCustomerWS',
             ALL_TABLE: '/BHDL_TDPD_Back_Credit_Card/rest/productLimit/all',
             UPDATE_TABLE: '/BHDL_TDPD_Back_Credit_Card/rest/productLimit/update',
+            VALIDATE_BIN: '/BHDL_TDPD_SIREMAS/siremas/bin/getAll',
+            UPDATE_TABLE_BIN: '/BHDL_TDPD_SIREMAS/siremas/bin/update',
+            INSERT_TABLE_BIN: '/BHDL_TDPD_SIREMAS/siremas/bin/add',
+            VALIDATE_FICO: '/BHDL_TDPD_Back_Credit_Card/rest/fico/customerEvaluation',
             ADD_CODE_PARAM: '/BHDL_TDPD_SIREMAS/siremas/transactionCode/add',
             UPDATE_CODE_PARAM: '/BHDL_TDPD_SIREMAS/siremas/transactionCode/update',
             ALL_CODE_PARAM: '/BHDL_TDPD_SIREMAS/siremas/transactionCode/getAll?originCode&transactionCode&productType',
             TRANSACTION_TYPE: '/BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=TransactionType',
             CURRENCY_CODE: 'BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=CurrencyCode',
+            TYPE_ROLE: 'BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=RuleType',
             PRODUCT_TYPE: 'BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=ProductType',
             STATUS:       'BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=Status',
+            VALIDATE_AFF: 'BHDL_TDPD_SIREMAS/siremas/maintenance/affiliate/all',
+            VALIDATE_AFF_COM: 'BHDL_TDPD_SIREMAS/siremas/maintenance/commerce/all',
+            INSERT_TABLE_AFF: 'BHDL_TDPD_SIREMAS/siremas/maintenance/affiliate/add',
+            INSERT_TABLE_COM: 'BHDL_TDPD_SIREMAS/siremas/maintenance/commerce/add',
+            VALIDATE_RULE: 'BHDL_TDPD_SIREMAS/siremas/rule/getAll',
+            UPDATE_ROLE: 'BHDL_TDPD_SIREMAS/siremas/rule/update',
+            INSERT_TABLE_ROLE: '/BHDL_TDPD_SIREMAS/siremas/rule/add',
             ADD_CIERRE_FORZOSO:  '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/add',
             GET_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/getByDocumentNumber',
-            UPDATE_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/update'       
+            UPDATE_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/update'
+           
         });
 })();

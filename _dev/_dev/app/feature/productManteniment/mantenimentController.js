@@ -40,7 +40,6 @@
         vm.buttonActi = false;
         vm.labelstatus = '';
         vm.repeatFields= false;
-        //$rootScope.globalLimitData = {nombre:'ronny'};
 
         /*Metodos*/
         vm.addJobsData = addJobsData;
@@ -49,7 +48,44 @@
         vm.editJobsData = editJobsData;
         vm.statusButton = statusButton;
         vm.repeatProduct = repeatProduct;
+vm.modalCancel = modalCancel;
+        var modal = document.getElementById('myModal');
 
+        catalogService.getCatalogURL(URL.STATUS).then(
+            function(response){
+                vm.optStatus = response.data.data;
+        });
+
+        /**
+         *  @ngdoc method
+         *  @name modalCancel
+         *  @methodOf App.controller:creationAccountController
+         *
+         *  @description
+         *  Función que abre el modal para cancelar la operación en proceso y te redirecciona al home
+         */
+        function modalCancel() {
+            sweet.show({
+                title: messages.modals.warning.modaltitleWarning,
+                text: messages.modals.warning.modalCancelprocessGR,
+                type: messages.modals.warning.modalTypeWarning,
+                showCancelButton: true,
+                cancelButtonText: messages.modals.warning.modalCancelButton,
+                confirmButtonColor: messages.modals.warning.modalColorButton,
+                confirmButtonText: messages.modals.warning.modalConfirText,
+                closeOnConfirm: true
+            }, function () {
+                $timeout(function () {
+                    if(angular.isDefined($rootScope.customerDataCredit) && angular.isDefined($rootScope.customerDataCredit.numberIdentification)){
+                        deleteCustomerService.deleteCustomer($rootScope.customerDataCredit.numberIdentification);
+                    }
+                    
+                    var bin = false;
+                    localStorage.setItem("bin", bin);
+                    window.location.href = "/wps/portal/ptd/gruporamos/gruporamos/";
+                }, 0);
+            });
+        }
         function cargarProducto(){
             addTableService.allTable().then(function(responseValue) {
                 var dataJson = {};
@@ -83,8 +119,7 @@
                     /*addTableService.allTable().then(function(responseValue) {
                         console.log(responseValue);
                     });*/
-                    repeatProduct(); 
-                    // si no hay campos repetidos ejecuta la funcion
+                    repeatProduct();
                     if (vm.repeatFields) {
                         modalRepeatFields();
                         vm.repeatFields = false;
@@ -105,8 +140,8 @@
                         vm.formProductManteniment.$setPristine();
                         /*Volvemos el boolean que valida si la fuente de ingreso se encuentra disponible para editar */
                         vm.buttonEdit = false; 
-                        modalFactory.success("correcto");
-                    }   
+                    }
+                    
                 }, 0);
              }else{
                   //Chequea que todos los campos obligatorios esten llenos sean validos.
@@ -257,5 +292,8 @@
             });
 
         }
+
+
+
     }
 })();

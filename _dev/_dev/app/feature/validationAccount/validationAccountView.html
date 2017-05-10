@@ -7,8 +7,6 @@
           <!--fin area tope panel-->
           <div class="breadcrumbs">
             <ul>
-              <li><a href="#/prod">Mnatenimiento de Productos / </a></li>
-              <li><a href="#/trans">Mnatenimiento de Transaciones / </a></li>
               <li>Test Request Generation</li>
             </ul>
           </div>
@@ -113,7 +111,7 @@
             <div class="divheader">
               <h2>Datos Pre-Evaluación</h2>
             </div>
-            <form name="validationAccount.formValidationAccount2" novalidate role="form">
+            <form name="validationAccount.formValidationAccountPre" novalidate role="form">
               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">                
                 <div class="mantenimiento">
                    <span class="label">Ingreso Mensual RD$ </span> 
@@ -121,33 +119,35 @@
                     <input type="text" 
                       name="monthyIncome" 
                       ng-model="validationAccount.viewModelvalidationAccount.monthyIncome" 
-                      ng-class="{ 'hasError': (validationAccount.formValidationAccountnumber3.monthyIncome.$touched)
-                                && validationAccount.formValidationAccountnumber3.monthyIncome.$invalid 
-                                || validationAccount.viewModelvalidationAccount.monthyIncome<100 
+                      ng-class="{ 'hasError': (validationAccount.submittedPre || validationAccount.formValidationAccountPre.monthyIncome.$touched)
+                                && validationAccount.formValidationAccountPre.monthyIncome.$invalid 
+                                || validationAccount.viewModelvalidationAccount.monthyIncome<100 && 
+                                validationAccount.viewModelvalidationAccount.monthyIncome !== ''
                                 || validationAccount.monthyLimite}"
                      ng-maxlength="11"
                      ng-change= "validationAccount.monthyLimit();"
                       ng-click="validationAccount.monthyclean()"
                       ng-blur ="validationAccount.monthydetails()"
                      ng-required="true" />
-
                     <span class="alerttext" 
                           ng-if="validationAccount.monthyLimite"
                           ng-bind="::i18n.general.errorValidNumeros"></span>
 
                     <span class="alerttext" 
-                    ng-if="validationAccount.formValidationAccount2.monthyIncome.$error.required 
-                    && (validationAccount.submitted || validationAccount.formValidationAccount2.monthyIncome.$touched)"
+                    ng-if="validationAccount.formValidationAccountPre.monthyIncome.$error.required 
+                    && (validationAccount.submittedPre || validationAccount.formValidationAccountPre.monthyIncome.$touched)"
                     ng-bind="::i18n.general.requiredField"></span>
 
-                    <span class="alerttext" ng-if="validationAccount.viewModelvalidationAccount.monthyIncome<100">
+                    <span class="alerttext" 
+                          ng-if="validationAccount.viewModelvalidationAccount.monthyIncome<100 && 
+                                validationAccount.viewModelvalidationAccount.monthyIncome !== ''">
                       El ingreso mensual debe ser mayor a RD$100
                     </span>
                     <span class="alerttext" ng-if="validationAccount.formValidationAccount2.monthyIncome.$error.maxlength" ng-bind="::i18n.general.maxLength"></span>
 
                   </span>
 
-                                    <span class="label">Fecha Contratación/Ingreso</span> <span class="input2">
+                 <span class="label">Fecha Contratación/Ingreso</span> <span class="input2">
                   <input id="datepicker" type="text" style="width:95px"
                         name="datePassport" 
                         uib-datepicker-popup="{{validationAccount.format}}" 
@@ -161,12 +161,12 @@
                         clear-text="Limpiar"
                         close-text="Cerrar" 
                         ng-click="validationAccount.openDatePassport()" 
-                        ng-class="{ 'hasError': (validationAccount.submitted || validationAccount.formValidationAccount2.datePassport.$touched) 
-                        && validationAccount.formValidationAccount2.datePassport.$invalid }" 
+                        ng-class="{ 'hasError': (validationAccount.submittedPre || validationAccount.formValidationAccountPre.datePassport.$touched) 
+                        && validationAccount.formValidationAccountPre.datePassport.$invalid }" 
                         required />
                   <span class="alerttext" 
-                    ng-if="(validationAccount.submitted || validationAccount.formValidationAccount2.datePassport.$touched) 
-                            && validationAccount.formValidationAccount2.datePassport.$error.required">Este campo es obligatorio</span> 
+                    ng-if="(validationAccount.submittedPre || validationAccount.formValidationAccountPre.datePassport.$touched) 
+                            && validationAccount.formValidationAccountPre.datePassport.$error.required">Este campo es obligatorio</span> 
                   </span> 
                 </div>
               </div>
@@ -175,16 +175,16 @@
                     <input type="number" 
                       name="howYear" 
                       ng-model="validationAccount.viewModelvalidationAccount.howYear" 
-                      ng-class="{ 'hasError': validationAccount.formValidationAccount2.howYear.$touched
-                                && validationAccount.formValidationAccount2.howYear.$invalid}"
+                      ng-class="{ 'hasError': (validationAccount.submittedPre || validationAccount.formValidationAccountPre.howYear.$touched) 
+                        && validationAccount.formValidationAccountPre.howYear.$invalid }"
                      ng-change="validationAccount.yearValid();"
                      ng-maxlength="11"
                      ng-required="true" />
-                    <span class="alerttext" 
-                          ng-if="validationAccount.formValidationAccount2.howYear.$error.required && validationAccount.formValidationAccount2.howYear.$touched"
-                          ng-bind="::i18n.general.requiredField"></span>
-                    <span class="alerttext" ng-if="validationAccount.formValidationAccount2.howYear.$error.number" ng-bind="::i18n.general.errorValidNumeros"></span>
-                    <span class="alerttext" ng-if="validationAccount.formValidationAccount2.howYear.$error.maxlength" ng-bind="::i18n.general.maxLength"></span>
+                  <span class="alerttext" 
+                    ng-if="(validationAccount.submittedPre || validationAccount.formValidationAccountPre.howYear.$touched) 
+                            && validationAccount.formValidationAccountPre.howYear.$error.required">Este campo es obligatorio</span> 
+                    <span class="alerttext" ng-if="validationAccount.formValidationAccountPre.howYear.$error.number" ng-bind="::i18n.general.errorValidNumeros"></span>
+                    <span class="alerttext" ng-if="validationAccount.formValidationAccountPre.howYear.$error.maxlength" ng-bind="::i18n.general.maxLength"></span>
 
                   </span> 
                   
@@ -192,23 +192,25 @@
                     <select 
                       name="livingPlace"
                       ng-model="validationAccount.viewModelvalidationAccount.livingPlace"
-                      ng-class="{ 'hasError': (validationAccount.submitted || validationAccount.formValidationAccount2.livingPlace.$touched)
-                                && validationAccount.formValidationAccount2.livingPlace.$invalid}"
+                      ng-class="{ 'hasError': (validationAccount.submittedPre || validationAccount.formValidationAccountPre.livingPlace.$touched)
+                                && validationAccount.formValidationAccountPre.livingPlace.$invalid}"
                       ng-options="optionType.id as optionType.value for optionType in validationAccount.livingPlace"
                       required>
                       <option></option>
                     </select>
                       <span class="alerttext" 
-                          ng-if="(validationAccount.submitted || validationAccount.formValidationAccount2.livingPlace.$touched) 
-                                  && validationAccount.formValidationAccount2.livingPlace.$error.required">Este campo es obligatorio</span>
+                          ng-if="(validationAccount.submittedPre || validationAccount.formValidationAccountPre.livingPlace.$touched) 
+                                  && validationAccount.formValidationAccountPre.livingPlace.$error.required">Este campo es obligatorio</span>
                   </span> 
                   </div>
               </div>
               <div class="botonarearight btnValid"> 
               <button
-                      class="boton btnlager btnInactive" 
-				              ng-disabled="true">
-                      VALIDAR
+                      class="boton btnlager" 
+                      ng-class="{'btnInactive': !validationAccount.disablePre}" 
+                      ng-disabled="!validationAccount.disablePre"
+                      ng-click="validationAccount.validFico();">
+                      EVALUAR
                   </button>
               </div>
             </form>
@@ -381,3 +383,44 @@
          </div>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
