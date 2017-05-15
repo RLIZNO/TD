@@ -52,6 +52,6 @@
             UPDATE_LABOR_DATA_SIEBEL: '/BHDL_TDPD_Back_Customers/rest/clientPerson/updateLaborData',
             ADD_CIERRE_FORZOSO:  '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/add',
             GET_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/getByDocumentNumber',
-            UPDATE_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/update'
+            UPDATE_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/update',           
         });
 })();

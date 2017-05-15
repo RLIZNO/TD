@@ -326,20 +326,20 @@
             /*GUARDAR DATOS EN EL OBJETO GLOBAL*/
 
             $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.isGovOfficer;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.isRelacionatedGovOfficer;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasOperationForeignCurrency;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasImport;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasExport;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasInvesment;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasConsingment;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasServicePayment;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasLoanPayment;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasPurchaseSaleForeignExchange;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasOtherForeignExchange;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.relationGovOfficer;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.nameLastnamePEPOfficer;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.positionPEPOfficer;
-            $rootScope.globalUserJSon.isGovOfficer = jsonForeignCurrency.hasOtherOperationForeignCurrency;
+            $rootScope.globalUserJSon.isRelacionatedGovOfficer = jsonForeignCurrency.isRelacionatedGovOfficer;
+            $rootScope.globalUserJSon.hasOperationForeignCurrency = jsonForeignCurrency.hasOperationForeignCurrency;
+            $rootScope.globalUserJSon.hasImport = jsonForeignCurrency.hasImport;
+            $rootScope.globalUserJSon.hasExport = jsonForeignCurrency.hasExport;
+            $rootScope.globalUserJSon.hasInvesment = jsonForeignCurrency.hasInvesment;
+            $rootScope.globalUserJSon.hasConsingment = jsonForeignCurrency.hasConsingment;
+            $rootScope.globalUserJSon.hasServicePayment = jsonForeignCurrency.hasServicePayment;
+            $rootScope.globalUserJSon.hasLoanPayment = jsonForeignCurrency.hasLoanPayment;
+            $rootScope.globalUserJSon.hasPurchaseSaleForeignExchange = jsonForeignCurrency.hasPurchaseSaleForeignExchange;
+            $rootScope.globalUserJSon.hasOtherForeignExchange = jsonForeignCurrency.hasOtherForeignExchange;
+            $rootScope.globalUserJSon.relationGovOfficer = jsonForeignCurrency.relationGovOfficer;
+            $rootScope.globalUserJSon.nameLastnamePEPOfficer = jsonForeignCurrency.nameLastnamePEPOfficer;
+            $rootScope.globalUserJSon.positionPEPOfficer = jsonForeignCurrency.positionPEPOfficer;
+            $rootScope.globalUserJSon.hasOtherOperationForeignCurrency = jsonForeignCurrency.hasOtherOperationForeignCurrency;
             
             /*localStorage.setItem("JSON", $rootScope.globalUserJSon);
             localStorage.setItem("JSON", JSON.stringify($rootScope.globalUserJSon));*/
@@ -347,7 +347,7 @@
             var data = JSON.stringify($rootScope.globalUserJSon);
             console.log(data);
             var JSonCierreForzoso = {
-                data,
+                "data": data,
                 "documentNumber": $rootScope.globalUserJSon.documentNumber,
                 "userName":"AM029969",
                 "customerFlowType":"1"

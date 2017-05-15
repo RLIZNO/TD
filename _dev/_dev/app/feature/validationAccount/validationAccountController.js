@@ -878,6 +878,21 @@
                 }
 
             }, modalError);
+
+            /*var getJsonCierreForz = localStorage.getItem('JSON');
+            var docNumUserCierreForz = JSON.parse(getJsonCierreForz);
+            var t = docNumUserCierreForz.documentNumber;*/
+
+            addTableService.getcierreForzosoTC(documentNumber).then(
+                function (response) {   
+                    if(response.success == true ){
+                        $rootScope.globalUserJSon = response.data;
+                        window.location.href = "#/form";
+                    }
+                });  
+
+            
+
         }
 
         /**
@@ -1398,8 +1413,9 @@
                         var dataSiebel = false;
                         localStorage.setItem("dataSiebel", dataSiebel);
                         localStorage.setItem("validclientTc", validclientTc);
-                        window.location.href = "/wps/portal/ptd/inicio";
-                        //window.location.href = "../index.html";
+                        //window.location.href = "/wps/portal/ptd/inicio";
+                        //window.location.href = "#/form";
+                        window.location.href = "../index.html";
                     }, 0);
                 });
             }
@@ -1442,8 +1458,8 @@
                             localStorage.setItem("dataSiebel", dataSiebel);
                             var validclientTc = 'validclientTc';
                             localStorage.setItem("validclientTc", validclientTc);
-                            window.location.href = "/wps/portal/ptd/inicio";
-                            //window.location.href = "../index.html";
+                            //window.location.href = "/wps/portal/ptd/inicio";
+                            window.location.href = "../index.html";
                         }, modalError); 
 
             }
@@ -1545,6 +1561,8 @@
                 if(error.message === "Cliente no posee preaprobado." ){
                     vm.decisionMessage = '';
                     vm.clientCanContinue =  false;
+                    /*vm.decisionMessage = 'PRE-APROBADO';
+                    vm.clientCanContinue =  true;*/
                     vm.validpreAprobado = true;
                 }
                 if(error.message === "El cliente ya posee el producto." ){

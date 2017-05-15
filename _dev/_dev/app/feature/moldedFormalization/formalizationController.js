@@ -20,7 +20,8 @@
         '$scope',
         'creditBureauService',
         'creditListService',
-        '$timeout',
+        'validationCardKeyServ',
+        '$timeout'
     ];
 
     function formalizationController(
@@ -37,6 +38,7 @@
         $scope,
         creditBureauService,
         creditListService,
+        validationCardKeyServ,
         $timeout
     ) {
         var vm = this;
@@ -95,9 +97,36 @@
         vm.validAditional = validAditional;
         vm.aggAditional = false;
         vm.validImpre = validImpre;
+        vm.positionCard="";
+        $rootScope.globalUserJSon;
+
 
         function validImpre(){
-            window.location.href = "#/result";
+
+            validationCardKeyServ.getPositionKeyCard($rootScope.globalUserJSon.documentNumber).then(
+                function(response){
+                    vm.positionCard = response.data.positionId;
+                }
+            );
+            
+            //window.location.href = "#/result";
+            var modal = document.getElementById('myModal');
+            var span = document.getElementsByClassName("close")[0];
+            modal.style.display = "block";
+
+            span.onclick = function() {
+                modal.style.display = "none";
+                vm.submitted = false;
+                vm.formNewInvalid =  false;
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                    vm.submitted = false;
+                    vm.formNewInvalid =  false;
+                }
+            }
         }
 
         /**
