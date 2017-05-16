@@ -187,6 +187,7 @@
         vm.jsonDataTc = {};
         vm.clientCanContinue = false;
         vm.clientAprobado = false;
+        var jsonData = {};
         vm.viewModelvalidationAccount.basicData = {
                 email : null,
                 firstLastName : null,
@@ -237,6 +238,14 @@
         vm.validFico = validFico;
         //console.log($rootScope.globalLimitData);
         $rootScope.globalLimitData={};
+
+        /*jsonData = JSON.parse(localStorage.getItem("jsonDataClient"));
+
+        addTableService.getcierreForzosoTC(jsonData.numberDocument).then(
+            function(response){
+                $rootScope.globalLimitData = response.data;
+            }
+        );*/
 
         function loadCreditCardFirstData(){
            addTableService.allTable().then(function(responseValue) {
@@ -805,8 +814,6 @@
         }
 
         }
-
-        var jsonData = {}
          /**
          *  @ngdoc function
          *  @name resetData

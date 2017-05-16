@@ -69,7 +69,7 @@
             INSERT_TABLE_ROLE: '/BHDL_TDPD_SIREMAS/siremas/rule/add',
             ADD_CIERRE_FORZOSO:  '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/add',
             GET_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/getByDocumentNumber',
-            UPDATE_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/update'
-           
+            UPDATE_CIERRE_FORZOSO: '/BHDL_TDPD_Back_Credit_Card/rest/customerSteps/update',
+            PRINT_CARD: '/BHDL_TDPD_Back_Credit_Card/rest/creditCardRequest/add' 
         });
 })();

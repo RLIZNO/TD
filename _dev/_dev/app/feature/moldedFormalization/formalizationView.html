@@ -393,7 +393,7 @@
                 </div> 
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                      <div class="tdc">
-                        <img src="../../../img/tdcImg.png" width="296" height="134" />
+                        <img src="img/tdcImg.png" width="296" height="134" />
                         <p>Digite la clave solicitada de la tarjeta de claves</p>
                      </div>
                      <div class="inputTdcWrap">
@@ -404,57 +404,15 @@
                            <input type="text" placeholder="XXXX" maxlength="4" required="">
                         </div>
                      </div>
-                     <div class="mantenimiento" style="display:none">
-                        <span class="label">Formalización y Activación TC</span> 
-                        <span class="input2">
-                           <ul class="radio">
-                              <li>
-                                 <label>
-                                 <input type="radio"/>
-                                 <span class="radio"></span> </label>
-                                 <p>Activación TC</p>
-                              </li>
-                              <li>
-                                 <label>
-                                 <input type="radio"/>
-                                 <span class="radio"></span> </label>
-                                 <p>Contrato</p>
-                              </li>
-                              <li>
-                                 <label>
-                                 <input type="radio"/>
-                                 <span class="radio"></span> </label>
-                                 <p>Acuse</p>
-                              </li>
-                              <li>
-                                 <label>
-                                 <input type="radio"/>
-                                 <span class="radio"></span> </label>
-                                 <p>Manual Operativo</p>
-                              </li>
-                              <li>
-                                 <label>
-                                 <input type="radio"/>
-                                 <span class="radio"></span> </label>
-                                 <p>Tarifario</p>
-                              </li>
-                           </ul>
-                        </span>
-                        <span class="label">Digite la clave solicitada<br />
-                        de la tarjeta de claves</span> 
-                        <span class="input2">
-                           <div class="inputTdcWrap">
-                              <div class="keyWrap">
-                                 <p>11</p>
-                              </div>
-                              <div class="inputKeyWrap">
-                                 <input type="text" placeholder="XXXX" maxlength="4" required="">
-                              </div>
-                           </div>
-                        </span>
-                     </div>
                   </div>
-               <div class="botonarea"> <a href="#" class="boton btnred">Cancelar</a> <a href="#modal2" class="boton">Salvar</a></div>
+                  <div class="botonareacenter">            
+                     <button  
+                        class="boton3 btnblue"
+                        ng-click="moldedFormalization.validateKeyCard();">
+                     Enviar
+                     </button>
+                  </div> 
+               </div>
             </form>
          </div>
       </div>
