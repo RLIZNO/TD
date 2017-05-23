@@ -1,25 +1,27 @@
-<!--Inicio Area titulo-->
-<div id="titulo">
-   <div id="contenedortitulo">
-      <div id="topepanel">
-         <h2>Formalización y Embozado</h2>
+ 
+      <!--Inicio Area titulo-->
+      <div id="titulo">
+        <div id="contenedortitulo">
+          <div id="topepanel">
+            <h2>Formalización y Embozado</h2>
+          </div>
+          <!--fin area tope panel-->
+          <div class="breadcrumbs">
+            <ul>
+              <li><a href="#">Inicio / </a></li>
+              <li>Test Request Generation</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <!--fin area tope panel-->
-      <div class="breadcrumbs">
-         <ul>
-            <li><a href="#">Inicio / </a></li>
-            <li>Test Request Generation</li>
-         </ul>
-      </div>
-   </div>
-</div>
-<div id="bodymantenimientos">
-   <div id="cuerpomantenimientos">
-      <!--Inicio Area mantenimientos-->
-      <form name="moldedFormalization.formMoldedFormalization" novalidate role="form">
-         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 campomantenimiento">
+
+      <div id="bodymantenimientos">
+        <div id="cuerpomantenimientos"> 
+          <!--Inicio Area mantenimientos-->
+          <form name="moldedFormalization.formMoldedFormalization" novalidate role="form">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 campomantenimiento">
             <div class="divheader">
-               <h2>Personalizacion de Plástico / Embozado</h2>
+              <h2>Personalizacion de Plástico / Embozado</h2>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                <div class="mantenimiento">
@@ -79,117 +81,110 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="mantenimiento"> 
       <div class="columna755_25_1">
-      <span class="labelAditional">Nombre en Plástico</span> 
-      <span class="input">
-      <input name="namePlastic2"
-         type="text"
-         class="mayusculas"
-         ng-class="{ 'hasError': (moldedFormalization.formMoldedFormalization.namePlastic2.$touched)
-         && moldedFormalization.formMoldedFormalization.namePlastic2.$invalid 
-         || moldedFormalization.espresion2}"
-         ng-model="moldedFormalization.namePlastic2"
-         ng-maxlength="50"
-         ng-change= "moldedFormalization.validAcen2();"
-         ng-required="true" />
-      <span 
-         class="alerttext" 
-         ng-if="(validationAccount.submitted || moldedFormalization.formMoldedFormalization.namePlastic2.$touched) &&  
-         moldedFormalization.formMoldedFormalization.namePlastic2.$invalid"
-         >Este campo es obligatorio
-      </span>
-      <span 
-         class="alerttext" 
-         ng-if="moldedFormalization.espresion2"
-         >Este campo no permite numeros ni acentos
-      </span>
-      <span
-         class="alerttext"
-         ng-if="moldedFormalization.formMoldedFormalization.namePlastic2.$error.maxlength"
-         ng-bind="::i18n.general.maxLength">
-      </span>
-      </span> 
+        <span class="labelAditional">Nombre en Plástico</span> 
+        <span class="input">
+          <input name="namePlastic2"
+           type="text"
+           class="mayusculas"
+           ng-class="{ 'hasError': (moldedFormalization.formMoldedFormalization.namePlastic2.$touched)
+           && moldedFormalization.formMoldedFormalization.namePlastic2.$invalid 
+           || moldedFormalization.espresion2}"
+           ng-model="moldedFormalization.namePlastic2"
+           ng-maxlength="50"
+           ng-change= "moldedFormalization.validAcen2();"
+           ng-required="true" />
+        <span 
+           class="alerttext" 
+           ng-if="(validationAccount.submitted || moldedFormalization.formMoldedFormalization.namePlastic2.$touched) &&  
+           moldedFormalization.formMoldedFormalization.namePlastic2.$invalid"
+           >Este campo es obligatorio
+        </span>
+        <span 
+           class="alerttext" 
+           ng-if="moldedFormalization.espresion2"
+           >Este campo no permite numeros ni acentos
+        </span>
+        <span
+           class="alerttext"
+           ng-if="moldedFormalization.formMoldedFormalization.namePlastic2.$error.maxlength"
+           ng-bind="::i18n.general.maxLength">
+        </span>
+        </span> 
+      </div>
+      <div class="columna755_25_2">
+        <span class="labelAditional">Nombre del cliente</span> 
+        <span class="input">
+          <input name="nameUser"
+           type="text"
+           class="mayusculas"
+           ng-class="{ 'hasError': (moldedFormalization.formMoldedFormalization.nameUser.$touched)
+           && moldedFormalization.formMoldedFormalization.nameUser.$invalid 
+           || moldedFormalization.espresion2}"
+           ng-model="moldedFormalization.nameUser"
+           ng-maxlength="50"
+           ng-change= "moldedFormalization.validAcen2();"
+           ng-required="true" />
+        <span 
+           class="alerttext" 
+           ng-if="(validationAccount.submitted || moldedFormalization.formMoldedFormalization.nameUser.$touched) &&  
+           moldedFormalization.formMoldedFormalization.nameUser.$invalid"
+           >Este campo es obligatorio
+        </span>
+        <span 
+           class="alerttext" 
+           ng-if="moldedFormalization.espresion2"
+           >Este campo no permite numeros ni acentos
+        </span>
+        <span
+           class="alerttext"
+           ng-if="moldedFormalization.formMoldedFormalization.nameUser.$error.maxlength"
+           ng-bind="::i18n.general.maxLength">
+        </span>
+        </span> 
       </div>
       </div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <div class="mantenimiento">  
-      <div class="columna3_1">
-      <span class="labelAditional">Cédula</span>
-      <span class="input">
-      <input name="identificationName" type="text"  
-         ng-model="moldedFormalization.viewModelmoldedFormalization.identificationName"
-         ng-keypress="moldedFormalization.validateClient($event);"
-         ng-class="{ 'hasError': (moldedFormalization.submitted || 
-         moldedFormalization.formMoldedFormalization.identificationName.$touched) && 
-         moldedFormalization.formMoldedFormalization.identificationName.$invalid}" />
-      </span>
-      </div>
-      <div class="columna3_2">
-      <span class="labelAditional">Sexo</span> 
-      <span class="input">
-      <select
-         id="gender"
-         name="sex"
-         ng-model="moldedFormalization.viewModelmoldedFormalization.sex"
-         ng-class="{ 'hasError': (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.sex.$touched)
-         && moldedFormalization.formMoldedFormalization.sex.$invalid}"
-         ng-options="sexo.id as sexo.value for sexo in moldedFormalization.typeSex"
-         ng-required="true">
-      </select>
-      <span class="alerttext" 
-         ng-if="(moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.sex.$touched) 
-         && moldedFormalization.formMoldedFormalization.sex.$error.required">Este campo es obligatorio</span> 
-      </span>
-      </div>
-      <div class="columna3_3">
-      <span class="labelAditional">Fecha Nacimiento</span>
-      <span class="input">
-      <input type="text"
-         id="fechaNacimiento"
-         name="datePassport" 
-         uib-datepicker-popup="{{moldedFormalization.format}}" 
-         date-set-hidden="true"
-         date-typer="true"
-         ng-model="moldedFormalization.datePassport"
-         is-open="moldedFormalization.popupDatePassport.opened"
-         datepicker-options="moldedFormalization.dateOptions" 
-         readonly="readonly"
-         current-text="Hoy" 
-         clear-text="Limpiar"
-         close-text="Cerrar" 
-         data-set="{{moldedFormalization.myDate}}"
-         ng-click="moldedFormalization.openDatePassport()" 
-         ng-class="{ 'hasError': (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
-         && moldedFormalization.formMoldedFormalization.datePassport.$invalid }" 
-         required />
-      <span class="alerttext" 
-         ng-if="(moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
-         && moldedFormalization.formMoldedFormalization.datePassport.$error.required">Este campo es obligatorio</span>   
-      </span>
-      </div>
-      </div>
-      <div class="mantenimiento">  <div class="columna3_1"><span class="labelAditional">Ciudad de Nacimiento</span> <span class="input">
-      <input name="" type="text" />
-      </span></div>
-      <div class="columna3_2">
-      <span class="labelAditional">Nacionalidad</span>
-      <span class="input">
-      <select 
-         id="nacionalidad"
-         name="nacionalidad"
-         ng-model="moldedFormalization.viewModelmoldedFormalization.nacionalidad"
-         ng-class="{ 'hasError': (customerBasicData.submitted || moldedFormalization.formMoldedFormalization.nacionalidad.$touched) && moldedFormalization.formMoldedFormalization.nacionalidad.$invalid }"
-         ng-options="nationality.id as nationality.value for nationality in moldedFormalization.nationalities">
-      </select>
-      <span class="alerttext" 
-         ng-if="(validationAccount.submitted || moldedFormalization.formMoldedFormalization.nacionalidad.$touched) 
-         && moldedFormalization.formMoldedFormalization.nacionalidad.$error.required">Este campo es obligatorio</span>    
-      </span>
-      </span>
-      </div>
-      <div class="columna3_3">
-      <span class="labelAditional">Estado Civil</span> 
-      <span class="input">
+        <div class="columna3_1">
+          <span class="labelAditional">Cédula</span>
+          <span class="input">
+            <input name="identificationName" type="text"  
+             ng-model="moldedFormalization.viewModelmoldedFormalization.identificationName"
+             ng-class="{ 'hasError': (moldedFormalization.submitted || 
+             moldedFormalization.formMoldedFormalization.identificationName.$touched) && 
+             moldedFormalization.formMoldedFormalization.identificationName.$invalid}" />
+          </span>
+        </div>
+        <div class="columna3_2_1">
+          <div class="botonarealeft ">            
+           <button  
+              class="boton3 btnblue"
+              ng-click="moldedFormalization.validateClient()">
+           Validar
+           </button>
+          </div>
+        </div>
+        <div class="columna3_2_1">
+          <span class="labelAditionalDef">Sexo</span> 
+          <span class="inputDefi inputDef">
+          <select
+             id="gender"
+             name="sex"
+             ng-model="moldedFormalization.viewModelmoldedFormalization.sex"
+             ng-class="{ 'hasError': (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.sex.$touched)
+             && moldedFormalization.formMoldedFormalization.sex.$invalid}"
+             ng-options="sexo.id as sexo.value for sexo in moldedFormalization.typeSex"
+             ng-required="true">
+          </select>
+          <span class="alerttext" 
+             ng-if="(moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.sex.$touched) 
+             && moldedFormalization.formMoldedFormalization.sex.$error.required">Este campo es obligatorio</span> 
+          </span>
+        </div>
+        <div class="columna3_2_1">
+      <span class="labelAditionalDef">Estado Civil</span> 
+      <span class="inputDefi inputDef">
       <select
          name="status"
          ng-model="moldedFormalization.viewModelmoldedFormalization.status"
@@ -205,9 +200,81 @@
       </span>
       </div>
       </div>
+      <div class="mantenimiento">
+        <div class="columna3_1">
+          <span class="labelAditional">Fecha Nacimiento</span>
+          <!--<span class="input">
+          <input type="text"
+             id="fechaNacimiento"
+             name="datePassport" 
+             uib-datepicker-popup="{{moldedFormalization.format}}" 
+             date-set-hidden="true"
+             date-typer="true"
+             ng-model="moldedFormalization.datePassport"
+             is-open="moldedFormalization.popupDatePassport.opened"
+             datepicker-options="moldedFormalization.dateOptions " 
+             readonly="readonly"
+             current-text="Hoy" 
+             clear-text="Limpiar"
+             close-text="Cerrar" 
+             data-set="{{moldedFormalization.myDate}}"
+             ng-click="moldedFormalization.openDatePassport()" 
+             ng-class="{ 'hasError': (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
+             && moldedFormalization.formMoldedFormalization.datePassport.$invalid }" 
+             required />
+          <span class="alerttext" 
+             ng-if="(moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
+             && moldedFormalization.formMoldedFormalization.datePassport.$error.required">Este campo es obligatorio</span>   
+          </span>-->
+          <span class="input2">
+                     <input type="text"
+                        id="fechaNacimiento"
+                        name="datePassport" 
+                        uib-datepicker-popup="{{moldedFormalization.format}}" 
+                        date-set-hidden="true"
+                        date-typer="true"
+                        ng-model="moldedFormalization.datePassport"
+                        is-open="moldedFormalization.popupDatePassport.opened"
+                        datepicker-options="moldedFormalization.dateOptions" 
+                        readonly="readonly"
+                        current-text="Hoy" 
+                        clear-text="Limpiar"
+                        close-text="Cerrar" 
+                        data-set="{{moldedFormalization.myDate}}"
+                        ng-click="moldedFormalization.openDatePassport()" 
+                        ng-class="{ 'hasError': (moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
+                        && moldedFormalization.formMoldedFormalization.datePassport.$invalid }" 
+                        required />
+                     <span class="alerttext" 
+                        ng-if="(moldedFormalization.submitted || moldedFormalization.formMoldedFormalization.datePassport.$touched) 
+                        && moldedFormalization.formMoldedFormalization.datePassport.$error.required">Este campo es obligatorio</span>         
+                     </span>
+        </div>
+        <div class="columna3_2"><span class="labelAditional">Ciudad de Nacimiento</span> 
+          <span class="input">
+            <input name="" type="text" />
+          </span>
+        </div>
+        <div class="columna3_3">
+        <span class="labelAditional">Nacionalidad</span>
+        <span class="input">
+        <select 
+           id="nacionalidad"
+           name="nacionalidad"
+           ng-model="moldedFormalization.viewModelmoldedFormalization.nacionalidad"
+           ng-class="{ 'hasError': (customerBasicData.submitted || moldedFormalization.formMoldedFormalization.nacionalidad.$touched) && moldedFormalization.formMoldedFormalization.nacionalidad.$invalid }"
+           ng-options="nationality.id as nationality.value for nationality in moldedFormalization.nationalities">
+        </select>
+        <span class="alerttext" 
+         ng-if="(validationAccount.submitted || moldedFormalization.formMoldedFormalization.nacionalidad.$touched) 
+         && moldedFormalization.formMoldedFormalization.nacionalidad.$error.required">Este campo es obligatorio
+         </span>    
+        </span>
+      </div>
+      </div>
       <h4>Datos de Contacto Adicional</h4> 
       <div class="mantenimiento end">  
-      <div class="columna3_1">
+      <div class="columna3_2">
       <span class="labelAditional">Teléfono casa</span>
       <span class="input">
       <input type="number" 
@@ -225,22 +292,28 @@
       <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.landLine.$error.minlength" ng-bind="::i18n.general.errorValid10Digi"></span>
       </span>
       </div>
-      <div class="columna3_2"><span class="labelAditional">Teléfono móvil</span> <span class="input">
-      <input name="" type="text" />
-      </span></div>
-      <div class="columna3_3">
-      <span class="labelAditional">Correo Electrónico</span> 
-      <span class="input">
-      <input type="email" 
-         name="email" 
-         ng-model="moldedFormalization.email" 
-         ng-class="{ 'hasError': moldedFormalization.formMoldedFormalization.email.$touched
-         && moldedFormalization.formMoldedFormalization.email.$invalid }" 
-         ng-maxlength="50"/>
-      <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.email.$error.maxlength" ng-bind="::i18n.general.maxLength"></span>
-      <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.email.$error.email" ng-bind="::i18n.general.errorEmail"></span>
-      </span> 
+      <div class="columna3_2">
+      <span class="labelAditional">Teléfono móvil</span> <span class="input">
+      <input name="" type="text"
+      ng-model="moldedFormalization.cellphone" >
       </span>
+      </div>
+      <div class="columna3_3">
+        <span class="labelAditional">Correo Electrónico</span> 
+        <span class="input">
+        <input type="email" 
+           name="email" 
+           ng-model="moldedFormalization.email" 
+           ng-class="{ 'hasError': moldedFormalization.formMoldedFormalization.email.$touched
+           && moldedFormalization.formMoldedFormalization.email.$invalid }" 
+           ng-maxlength="50"/>
+        <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.email.$error.maxlength" ng-bind="::i18n.general.maxLength">
+          
+        </span>
+        <span class="alerttext" ng-if="moldedFormalization.formMoldedFormalization.email.$error.email" ng-bind="::i18n.general.errorEmail">
+          
+        </span>
+        </span> 
       </div>
       </div>
       </div>
@@ -401,7 +474,7 @@
                            <p >{{moldedFormalization.positionCard}}</p>
                         </div>
                         <div class="inputKeyWrap">
-                           <input type="text" placeholder="XXXX" maxlength="4" required="">
+                           <input ng-model="moldedFormalization.viewModelmoldedFormalization.positionValueInput" type="text" placeholder="XXXX" maxlength="4" required="">
                         </div>
                      </div>
                   </div>

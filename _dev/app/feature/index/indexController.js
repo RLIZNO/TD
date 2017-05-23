@@ -25,7 +25,7 @@
         $rootScope,
         $cookies
     ) {
-
+        $rootScope.globalUserJSonPrinter = "";
         var vm = this;
         var userNamelocal = '';
 
@@ -82,6 +82,7 @@
             validationUserService.getValidationUser(vm.userName)
                 .then(
                 function (response) {
+                    $rootScope.globalUserJSonPrinter = response.data.printer ;
                     $rootScope.dataUser.userValid = response.success;
                     $rootScope.dataUser.userNameDescription = response.data.userName;
                     $rootScope.dataUser.sucursalId = response.data.sucursalCode;

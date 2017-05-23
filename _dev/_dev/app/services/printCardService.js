@@ -34,16 +34,17 @@
          */
 
         function printCard(json) {
-            $http.post(PREFIX_URL.SERVICES + URL.PRINT_CARD, json)
+            return $http.post(PREFIX_URL.SERVICES + URL.PRINT_CARD, json)
                 .then(
                     function (response) {
-                        return response;
+                        return response.data;
                     },
                     function (errResponse) {
-                        return errResponse;
+                        return $q.reject(errResponse);
                     }
                 );
         }
+
     }
 
 })();

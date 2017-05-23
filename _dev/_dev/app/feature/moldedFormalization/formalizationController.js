@@ -21,6 +21,7 @@
         'creditBureauService',
         'creditListService',
         'validationCardKeyServ',
+        'validationUserService',
         'printCardService',
         '$timeout',
         'addTableService'
@@ -41,6 +42,7 @@
         creditBureauService,
         creditListService,
         validationCardKeyServ,
+        validationUserService,
         printCardService,
         $timeout,
         addTableService
@@ -81,6 +83,7 @@
         };
 
         /* NUEVAS FUNCIONES */
+        vm.printCard = vm.printCard;
         vm.validateClient = validateClient;
         vm.resetData = resetData;
         vm.modalError = modalError;
@@ -90,6 +93,7 @@
         vm.getCreditListService = getCreditListService;
         vm.getvalidateClientCreditCard = getvalidateClientCreditCard;
         vm.validateKeyCard = validateKeyCard;
+        vm.nameUser="";
         vm.namePlastic2 = "";
         vm.landLine = "";
         vm.sex = "";
@@ -97,8 +101,11 @@
         vm.datePassport = "";
         vm.email = "";
         vm.myDate = "";
+        vm.cellphone="";
+        vm.cell
         vm.nacionalidad= document.getElementById("nacionalidad");
         vm.genderSelect = document.getElementById("gender");
+        //vm.bornDay = document.getElementById("fechaNacimiento");
         vm.validAditional = validAditional;
         vm.aggAditional = false;
         vm.validImpre = validImpre;
@@ -106,6 +113,8 @@
         $rootScope.globalUserJSon;
 
         jsonData = JSON.parse(localStorage.getItem("jsonDataClient"));
+
+
 
         addTableService.getcierreForzosoTC(jsonData.numberDocument).then(
             function(response){
@@ -143,9 +152,9 @@
 
         function validateKeyCard(){
             var jsonValKeyCard = {
-                "documentNumber":"22300845330",
+                "documentNumber": $rootScope.globalUserJSon.documentNumber,
                 "positionId":"40", 
-                "positionValue":"9990"
+                "positionValue": vm.viewModelmoldedFormalization.positionValueInput
             };
 
             validationCardKeyServ.validationCardKey(jsonValKeyCard).then(
@@ -154,7 +163,7 @@
                         modalFactory.success(messages.modals.success.codeCorrect);
                         printCard();
                     } else {
-                        modalFactory.error(messages.modals.success.codeIncorrect);
+                        modalFactory.error(messages.modals.error.codeIncorrect);
                     }
                 }
             );
@@ -164,20 +173,20 @@
 
             var jsonPrint = {
               "flowStepId":"2",
-              "printer":"HP Printer",
+              "printer": $rootScope.globalUserJSon.printer,
               "productCode":"DD",
-              "cardHolderName":"ADERSO DE LEON",
-              "documentNumber":"22300845330",
-              "additional": "N",
-              "createdBy": "usuarioConectado"
+              "cardHolderName": $rootScope.globalUserJSon.firstName + " " +  $rootScope.globalUserJSon.firstLasname,
+              "documentNumber": $rootScope.globalUserJSon.documentNumber,
+              "additional": 'N',
+              "createdBy": vm.username
             }
 
             printCardService.printCard(jsonPrint).then( 
                 function(response){
-                    if (response.data.success == true) {
-                        alert("Enviado a imprimir");
+                    if (response.success == true) {
+                        modalFactory.success(messages.modals.success.printSuccess);
                     } else {
-
+                        modalFactory.success(messages.modals.error.printError);
                     }
                 }
             );
@@ -362,8 +371,8 @@
 
 
         function validateClient()  {
-            var keyCode = event.which || event.keyCode;
-            if (keyCode === 13) {
+            /*var keyCode = event.which || event.keyCode;
+            if (keyCode === 13) {*/
 
             var documentNumber = vm.viewModelmoldedFormalization.identificationName;
             resetData();
@@ -385,7 +394,7 @@
                             }, 0);
                         }, modalError);
 
-            }
+            //}
 
         };
 
@@ -507,6 +516,7 @@
                         jsonData.nationality = jsonData.nationality;
                     }
 
+                    //vm.bornDay = document.getElementById("fechaNacimiento");
                     vm.getBureau = true;
                     vm.datePassport = jsonData.birthDate;
                     vm.email = jsonData.email;
@@ -585,6 +595,7 @@
             vm.validationClient = false;
             vm.viewModelmoldedFormalization.typeIdentification = 2;
             vm.bornDay = '';
+            //vm.bornDay.value = '';
             vm.datePassport = '';
             vm.limiteMaximoRd = '';
             vm.limiteMaximoUs = '';
@@ -684,6 +695,7 @@
                             (response) {
 
                             vm.dataClientExit = response;
+                            oJson =  response;
 
                     /* Validamos si el pais de residencia es la republica dominicana */
                     if (vm.dataClientExit.nacionality !== messages.general.dominicanCountrySibel) {
@@ -693,6 +705,7 @@
                     }
                             
                     vm.namePlastic2 = vm.dataClientExit.firstName + ' ' + vm.dataClientExit.firstLastname;
+                    vm.nameUser = vm.dataClientExit.firstName + ' ' + vm.dataClientExit.secondName + ' ' + vm.dataClientExit.firstLastname + ' ' + vm.dataClientExit.secondLastname;
                     vm.landLine = parseInt(vm.dataClientExit.cellPhone);
 
                     /** Validaciones para el tipo de moneda en dolares, donde se ocultan los campos Compra cheques de gerencia */
@@ -716,12 +729,37 @@
                         }
                     });
 
-                    vm.datePassport = vm.dataClientExit.birthDate;
+                    vm.bornDay = document.getElementById("fechaNacimiento");
+                    //vm.datePassport = vm.dataClientExit.birthDate;
+                    //vm.datePassport = vm.datePassport.replace("/","-").replace("/","-");
+                    //vm.datePassport.split("").reverse("").join("");
+                    //vm.datePassport = "1989-08-05";
+                    //30/12/1986
+                    /*NUEVO*/
+                    vm.datePassport = jsonData.birthDate;
                     vm.email = vm.dataClientExit.email;
-                    vm.myDate = vm.dataClientExit.birthDate;
+                    vm.myDate = jsonData.birthDate;
+                    vm.cellphone = jsonData.cellPhone;
                     vm.bornDay.setRangeText(vm.datePassport.substring(0, 10));
-                    console.log(vm.dataClientExit);
-                      
+
+                    /*var year = vm.datePassport.substring(6,10);
+                    var month = vm.datePassport.substring(3,5);
+                    var day = vm.datePassport.substring(0,2);
+                    var completeDate =  year  + "-" + month   + "-" + day  ;
+                    var today = new Date(completeDate);
+                    var today1 = new Date(completeDate);
+                    vm.myDate = today1;
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //
+                    var yyyy = today.getFullYear();
+                    today = yyyy +'-'+mm +'-'+dd; 
+                    vm.email = vm.dataClientExit.email;
+                    /*var dateTest =  new Date(completeDate);
+                    var dateTest2 = new Date(completeDate);*/
+                    //var dataTest = today;
+                    
+                    //vm.myDate = "2016-07-05";
+                    //vm.bornDay.setRangeText(dataTest.substring(0, 10));    
                     }, modalError);
                 }
 

@@ -77,7 +77,8 @@
 					minLimitRD: "Por favor editar el campo Límite RD, no cumple con el valor mínimo del producto. El valor mínimo es RD$",
 					maxLimitRD: "Por favor editar el campo Límite RD, no cumple con el valor máximo del producto. El valor máximo es RD$",
 					minLimitUSD: "Por favor editar el campo Límite USD, no cumple con el valor mínimo del producto. El valor mínimo es USD$",
-					maxLimitUSD: "Por favor editar el campo Límite USD, no cumple con el valor máximo del producto. El valor máximo es USD$"			
+					maxLimitUSD: "Por favor editar el campo Límite USD, no cumple con el valor máximo del producto. El valor máximo es USD$",
+					printError:    'El producto no se envío a imprimir'			
 	    		},
 	    		warning : {
 					modalCompeteFieldsOrClean : 'Debe completar los campos requeridos antes de visualizar el detalle esta ocupación, o limpiar la información en pantalla',
@@ -100,7 +101,8 @@
 	    		},
 				success : {
 					codeCorrect : 'El código digitado es correcto',
-					productSuccess: 'El producto se inserto correctamente'
+					productSuccess: 'El producto se inserto correctamente',
+					printSuccess:    'El producto se envío a imprimir, por favor espere'
 				}
 	    	},
 	    	steps : {

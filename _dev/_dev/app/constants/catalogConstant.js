@@ -12,7 +12,6 @@
             TYPE_LIVING : 61,
             SEX : 15,
             TYPE_DOCUMENTS_ONBASE : 67,
-            CIVIL_STATUS: 16,
-            NATIONALITIES: 13
+            CIVIL_STATUS: 16
         });
 })();

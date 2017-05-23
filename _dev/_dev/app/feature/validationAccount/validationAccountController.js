@@ -236,16 +236,9 @@
         vm.yearValid = yearValid;
         vm.openDatePassport  = openDatePassport;
         vm.validFico = validFico;
+        vm.datePassport = "";
         //console.log($rootScope.globalLimitData);
         $rootScope.globalLimitData={};
-
-        /*jsonData = JSON.parse(localStorage.getItem("jsonDataClient"));
-
-        addTableService.getcierreForzosoTC(jsonData.numberDocument).then(
-            function(response){
-                $rootScope.globalLimitData = response.data;
-            }
-        );*/
 
         function loadCreditCardFirstData(){
            addTableService.allTable().then(function(responseValue) {
@@ -759,6 +752,7 @@
                             while (text.toString().indexOf(busca) != -1) {
                                     text = text.toString().replace(busca,reemplaza);
                                     vm.viewModelvalidationAccount.limitUSD = text;
+                                    vm.limiteMaximoUs = text;
                                     return text; 
                             }
                     }
@@ -767,6 +761,7 @@
                             while (text.toString().indexOf(busca) != -1) {
                                     text = text.toString().replace(busca,reemplaza);
                                     vm.viewModelvalidationAccount.limitRD = text;
+                                    vm.limiteMaximoRd = text;
                                     return text; 
                             }
                     }
@@ -814,6 +809,8 @@
         }
 
         }
+
+        var jsonData = {}
          /**
          *  @ngdoc function
          *  @name resetData
@@ -849,6 +846,7 @@
             vm.getControlList = false;
             vm.validationClient = false;
             vm.viewModelvalidationAccount.typeIdentification = 2;
+            vm.datePassport = '';
         }
 
          resetData();
@@ -890,13 +888,13 @@
             var docNumUserCierreForz = JSON.parse(getJsonCierreForz);
             var t = docNumUserCierreForz.documentNumber;*/
 
-            addTableService.getcierreForzosoTC(documentNumber).then(
+            /*addTableService.getcierreForzosoTC(documentNumber).then(
                 function (response) {   
                     if(response.success == true ){
                         $rootScope.globalUserJSon = response.data;
                         window.location.href = "#/form";
                     }
-                });  
+                });  */
 
             
 
@@ -1421,7 +1419,6 @@
                         localStorage.setItem("dataSiebel", dataSiebel);
                         localStorage.setItem("validclientTc", validclientTc);
                         //window.location.href = "/wps/portal/ptd/inicio";
-                        //window.location.href = "#/form";
                         window.location.href = "../index.html";
                     }, 0);
                 });
@@ -1568,8 +1565,6 @@
                 if(error.message === "Cliente no posee preaprobado." ){
                     vm.decisionMessage = '';
                     vm.clientCanContinue =  false;
-                    /*vm.decisionMessage = 'PRE-APROBADO';
-                    vm.clientCanContinue =  true;*/
                     vm.validpreAprobado = true;
                 }
                 if(error.message === "El cliente ya posee el producto." ){

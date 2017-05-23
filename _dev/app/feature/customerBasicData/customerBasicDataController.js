@@ -82,6 +82,8 @@
         vm.typeDocument = '';
         var jsonBasicDataSiebel = {};
         $rootScope.globalUserJSon = [];
+        $rootScope.globalUserJSonPrinter;
+        //$rootScope.globalUserJSon;
 
         validatePhoneNumber();
 
@@ -738,6 +740,8 @@
                 jsonUpdateBasic.addressList[0].apartmentNumber = vm.viewModelBasicData.apartament;
                 
                 $rootScope.globalUserJSon = jsonUpdateBasic;
+                $rootScope.globalUserJSon.printer = $rootScope.globalUserJSonPrinter;
+
 
                         var clientPortal = JSON.parse(localStorage.getItem("clientPortal"));
 
