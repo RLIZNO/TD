@@ -20,7 +20,8 @@
         ) {
         var service = {
         getCatalog: getCatalog,
-        getCatalogURL : getCatalogURL
+        getCatalogURL : getCatalogURL,
+        getCatalogBin: getCatalogBin
     };
 
     return service;
@@ -43,6 +44,24 @@
                 );
             }
 
+
+    /**
+     * Servicio para obtener los catalogos
+     * 
+     * @param {any} id
+     * @returns
+     */
+    function getCatalogBin(url) {
+        return $http.get(PREFIX_URL.SERVICES + url, {cache: true})
+                .then(
+                        function (response) {
+                            return response.data;
+                        },
+                        function (errResponse) {
+                            return $q.reject(errResponse);
+                        }
+                );
+            }
             function getCatalogURL(url) {
                 return $http.get(PREFIX_URL.SERVICES + url, {cache: true}).then(
                     function (response) {

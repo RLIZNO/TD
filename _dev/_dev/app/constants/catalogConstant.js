@@ -7,11 +7,12 @@
         .constant('CATALOG', {
             TYPE_DOCUMENTS: 1,
             COUNTRIES: 2,
-            NATIONALITIES : 13,
             TASK_YES_NO : 23,
             TYPE_LIVING : 61,
             SEX : 15,
             TYPE_DOCUMENTS_ONBASE : 67,
-            CIVIL_STATUS: 16
+            CIVIL_STATUS: 16,
+            NATIONALITIES: 13,            
+            TASK_PRODUCT: 63
         });
 })();

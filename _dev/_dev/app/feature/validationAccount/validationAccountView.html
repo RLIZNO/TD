@@ -6,9 +6,6 @@
           </div>
           <!--fin area tope panel-->
           <div class="breadcrumbs">
-            <ul>
-              <li>Test Request Generation</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -27,14 +24,14 @@
               <div class="mantenimiento"> <span class="label" ng-bind="::i18n.views.validationAccount.labeltypeDocument"></span> <span class="input2">
                 <select 
                     name="typeIdentification"
-                    ng-model="validationAccount.viewModelvalidationAccount.typeIdentification" 				
+                    ng-model="validationAccount.viewModelvalidationAccount.typeIdentification"        
                     ng-options="typeDocument.id as typeDocument.value for typeDocument in validationAccount.typeDocuments | 
                                 filter: {id: default.TYPE_DOCUMENTS}"
                   >
                 </select>
                 </span> <span class="label">Número de documento<br />
                 de identidad</span> <span class="input2">
-                <input 	type="text" 
+                <input  type="text" 
                       name="numberIdentification" 
                       ng-model="validationAccount.viewModelvalidationAccount.numberIdentification" 
                       ng-class="{ 'hasError': (validationAccount.submitted || 
@@ -58,7 +55,8 @@
             </div>
 
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-              <div class="mantenimiento"> <span class="label">Tiene más de<br />
+              <div class="mantenimiento"> 
+              <span class="label">Tiene más de<br />
                 una nacionalidad </span> <span class="input2">
               <select style="width:85px"
                 name="doubleNationality"
@@ -70,10 +68,26 @@
                 required>
                 <option></option>
               </select>
-			          <span class="alerttext" 
+                <span class="alerttext" 
                     ng-if="(validationAccount.submitted || validationAccount.formValidationAccount.doubleNationality.$touched) 
                             && validationAccount.formValidationAccount.doubleNationality.$error.required">Este campo es obligatorio</span>
                 </span>
+              <div class="selectMedio">
+                <span class="label">Producto</span> <span class="input2 inputMedio">
+              <select style="width:85px"
+                name="typeProduct"
+                ng-model="validationAccount.viewModelvalidationAccount.typeProduct"
+                ng-class="{ 'hasError': (validationAccount.submitted || validationAccount.formValidationAccount.typeProduct.$touched)
+                           && validationAccount.formValidationAccount.typeProduct.$invalid}"
+                ng-options="product.id as product.extrafield1 for product in validationAccount.productTyoe"
+                required>
+                <option></option>
+              </select>
+                <span class="alerttext" 
+                    ng-if="(validationAccount.submitted || validationAccount.formValidationAccount.typeProduct.$touched) 
+                            && validationAccount.formValidationAccount.typeProduct.$error.required">Este campo es obligatorio</span>
+                </span>
+                </div>
               <div class="botonarearight btnValid" ng-if="validationAccount.cleintInvalid === true"> 
               <button
                       class="boton btnlager btnInactive" 
@@ -87,7 +101,7 @@
               <div class="botonarearight btnValid" ng-if="validationAccount.cleintInvalid === false"> 
               <button
                       class="boton btnlager btnInactive" 
-				              ng-disabled="true">
+                      ng-disabled="true">
                       VALIDAR
                   </button>
               </div>
@@ -154,10 +168,10 @@
                         date-set-hidden="true"
                         date-typer="true"
                         ng-model="validationAccount.viewModelvalidationAccount.datePassport"
-			                  is-open="validationAccount.popupDatePassport.opened"
+                        is-open="validationAccount.popupDatePassport.opened"
                         datepicker-options="validationAccount.dateOptions" 
                         readonly="readonly"
-			                  current-text="Hoy" 
+                        current-text="Hoy" 
                         clear-text="Limpiar"
                         close-text="Cerrar" 
                         ng-click="validationAccount.openDatePassport()" 
@@ -372,14 +386,14 @@
             <button ng-click="validationAccount.modalCancel()" 
                   class="boton3 btnlager2 btnred" >
                   Cancelar
-		        </button>
+            </button>
             <button  
                   class="boton3 btnlager2 btngreen" 
                   ng-class="{'btnInactive': !validationAccount.clientCanContinue}" 
                   ng-click="validationAccount.validationData()"
                   ng-disabled="!validationAccount.clientCanContinue || validationAccount.valueLimit || validationAccount.maximumLimitRDtrue || validationAccount.minimumLimitRDtrue || validationAccount.maximumLimitUStrue || validationAccount.minimumLimitUStrue" >
                   Siguiente
-		        </button>
+            </button>
          </div>
     </div>
   </div>

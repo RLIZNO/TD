@@ -78,14 +78,14 @@
         }
 
         /**
-         *	@ngdoc method
-         *	@description
-         *	Actualiza los datos del cliente en siebel.
+         *  @ngdoc method
+         *  @description
+         *  Actualiza los datos del cliente en siebel.
          * 
-         *	@param {Object} objeto con la información de los datos del cliente a actualizar. 
+         *  @param {Object} objeto con la información de los datos del cliente a actualizar. 
          * 
          *
-         *	@return {Object} array que devuelve los objetos con sus filas afectadas.
+         *  @return {Object} array que devuelve los objetos con sus filas afectadas.
          */
         function addManteniment(json) {
             $http.post(PREFIX_URL.SERVICES + URL.ADD_TABLE_MANTENIMENT, json)

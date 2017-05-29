@@ -54,6 +54,16 @@
                 url: "/result",
                 templateUrl: "app/feature/formalizationResult/formalizationResultView.html",
                 controller: "formalizationResultController as formalizationResult"
+            })
+            .state('consultAff',{
+                url: "/aff",
+                templateUrl: "app/feature/consultAff/parameConsultAffView.html",
+                controller: "parameConsultAffController as consultAff"
+            })
+            .state('consultClient',{
+                url: "/client",
+                templateUrl: "app/feature/consultClient/parameConsultClientView.html",
+                controller: "parameConsultClientController as consultClient"
             });
 
 

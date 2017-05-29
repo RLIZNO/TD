@@ -7,6 +7,7 @@
 
     //Inyeccion de dependencias
     formalizationController.$inject = [
+        'sweet',
         '$state',
         '$rootScope',
         'validationClientService',
@@ -14,6 +15,7 @@
         'SELECT_DEFAULT',
         'ngXml2json',
         'catalogService',
+        'URL',
         'catalogComplexService',
         'CATALOG',
         'messages',
@@ -28,6 +30,7 @@
     ];
 
     function formalizationController(
+        sweet,
         $state,
         $rootScope,
         validationClientService,
@@ -35,6 +38,7 @@
         SELECT_DEFAULT,
         ngXml2json,
         catalogService,
+        URL,
         catalogComplexService,
         CATALOG,
         messages,
@@ -88,6 +92,7 @@
         vm.resetData = resetData;
         vm.modalError = modalError;
         vm.clientCanContinue = false;
+        vm.nameUser="";
         vm.getCreditBureau = getCreditBureau;
         vm.getCreditBureauNoCLient = getCreditBureauNoCLient;
         vm.getCreditListService = getCreditListService;
@@ -102,7 +107,6 @@
         vm.email = "";
         vm.myDate = "";
         vm.cellphone="";
-        vm.cell
         vm.nacionalidad= document.getElementById("nacionalidad");
         vm.genderSelect = document.getElementById("gender");
         //vm.bornDay = document.getElementById("fechaNacimiento");
@@ -121,6 +125,19 @@
                 $rootScope.globalUserJSon = response.data;
             }
         );
+
+        catalogService.getCatalogBin(URL.CATALOG_BIN).then(
+        function (response) {
+            vm.typeProduct = response.data.List;
+        });
+
+        creditBureauService.getValidCientExisting(2 , "00100038397", vm.username).then(
+            function(response){
+                $rootScope.globalUserJSon.keyCardNumber = response.keyCardNumber;
+                vm.viewModelmoldedFormalization.keyCardNumber = response.keyCardNumber;
+            }
+        );
+
 
         function validImpre(){
 
@@ -160,7 +177,17 @@
             validationCardKeyServ.validationCardKey(jsonValKeyCard).then(
                 function(response){
                     if (response.success == true) {
-                        modalFactory.success(messages.modals.success.codeCorrect);
+                            sweet.show({
+                            title: '',
+                            text: messages.modals.success.codeCorrect,
+                            type: 'success',
+                            confirmButtonText: 'Ok',
+                            closeOnConfirm: true
+                        }, function () {
+                            $timeout(function () {
+                                window.location.href = "#/result";
+                            }, 0);
+                        });
                         printCard();
                     } else {
                         modalFactory.error(messages.modals.error.codeIncorrect);
@@ -174,10 +201,10 @@
             var jsonPrint = {
               "flowStepId":"2",
               "printer": $rootScope.globalUserJSon.printer,
-              "productCode":"DD",
+              "productCode": vm.viewModelmoldedFormalization.typeProduct,
               "cardHolderName": $rootScope.globalUserJSon.firstName + " " +  $rootScope.globalUserJSon.firstLasname,
               "documentNumber": $rootScope.globalUserJSon.documentNumber,
-              "additional": 'N',
+              "additional":  vm.viewModelmoldedFormalization.aditional,
               "createdBy": vm.username
             }
 
@@ -741,6 +768,7 @@
                     vm.myDate = jsonData.birthDate;
                     vm.cellphone = jsonData.cellPhone;
                     vm.bornDay.setRangeText(vm.datePassport.substring(0, 10));
+                    //vm.viewModelmoldedFormalization.keyCardNumber = 
 
                     /*var year = vm.datePassport.substring(6,10);
                     var month = vm.datePassport.substring(3,5);
@@ -762,9 +790,6 @@
                     //vm.bornDay.setRangeText(dataTest.substring(0, 10));    
                     }, modalError);
                 }
-
-                
-
             }, modalError);
         }
 

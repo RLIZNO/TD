@@ -65,6 +65,7 @@
         };
         vm.typeDocuments = '';
         vm.optionsYesNo = [];
+        vm.productTyoe = [];
         vm.validDebitNo = '';
         vm.alert = false;
         vm.username = 'AM029969';
@@ -297,6 +298,16 @@
         var validclientTc = localStorage.getItem("validclientTc");
         if (validclientTc === 'validclientTc'){
             $state.go('moldedFormalization');
+        } 
+
+        var consultAff = localStorage.getItem("consultAff");
+        if (consultAff === 'true'){
+            $state.go('consultAff');
+        } 
+
+        var consultClient = localStorage.getItem("consultClient");
+        if (consultClient === 'true'){
+            $state.go('consultClient');
         } 
 
         function cleanLimit () {
@@ -733,6 +744,13 @@
             var typeDocumentValue = vm.viewModelvalidationAccount.typeIdentification;
             var typeHousing = vm.viewModelvalidationAccount.livingPlace;
             var housingTime = vm.viewModelvalidationAccount.howYear;
+            var typeProducto = '';
+            angular.forEach(vm.productTyoe, function (value, key) {
+                if (value.id === vm.viewModelvalidationAccount.typeProduct) {
+                     typeProducto = parseInt(value.value);
+                }
+            });
+            
             
                 var income = vm.viewModelvalidationAccount.monthyIncome;
                 clean(income , ",", "" );
@@ -745,7 +763,7 @@
                  }
 
 
-            validationClientService.getValidaFico(date, ducumenNumber, typeDocumentValue, typeHousing, housingTime, vm.username, income).then(function (response) {
+            validationClientService.getValidaFico(date, ducumenNumber, typeDocumentValue, typeHousing, housingTime, vm.username, income, typeProducto).then(function (response) {
                         
                 console.log(response);
                 function limitUSD( text, busca, reemplaza ){
@@ -884,20 +902,14 @@
 
             }, modalError);
 
-            /*var getJsonCierreForz = localStorage.getItem('JSON');
-            var docNumUserCierreForz = JSON.parse(getJsonCierreForz);
-            var t = docNumUserCierreForz.documentNumber;*/
 
-            /*addTableService.getcierreForzosoTC(documentNumber).then(
+            addTableService.getcierreForzosoTC(documentNumber).then(
                 function (response) {   
                     if(response.success == true ){
                         $rootScope.globalUserJSon = response.data;
                         window.location.href = "#/form";
                     }
-                });  */
-
-            
-
+            });  
         }
 
         /**
@@ -1281,8 +1293,14 @@
         function getvalidateClientCreditCard(){
             var documentNumber = vm.viewModelvalidationAccount.numberIdentification;
             var typeIdentification = vm.viewModelvalidationAccount.typeIdentification;
+            var typeProducto = '';
+            angular.forEach(vm.productTyoe, function (value, key) {
+                if (value.id === vm.viewModelvalidationAccount.typeProduct) {
+                    typeProducto = parseInt(value.value);
+                }
+            });
                 
-            validationClientService.getvalidateClientCreditCard(documentNumber, vm.username, typeIdentification).then(
+            validationClientService.getvalidateClientCreditCard(documentNumber, vm.username, typeIdentification, typeProducto).then(
                     function (responseValue) {
                     console.log(responseValue);
                     if(vm.fichaBand){
@@ -1509,6 +1527,26 @@
                 );
         }
         getTaskYesNo();
+
+        /**
+         *  @ngdoc function
+         *  @name getTaskYesNo
+         *  @methodOf App.controller:customerForeignCurrencyController
+         *
+         *  @description
+         *  Cargamos los valores de los desplegables 
+         *  Para cuando el cliente desea tarjeta de debito.
+         */
+        function getTypeProdcut() {
+            catalogService.getCatalog(CATALOG.TASK_PRODUCT)
+                .then(
+                    function (response) {
+                        vm.productTyoe = response.data;
+                        console.log(vm.productTyoe);
+                    }
+                );
+        }
+        getTypeProdcut();
 
         /**
          *  @ngdoc function

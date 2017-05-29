@@ -8,6 +8,8 @@
     angular
         .module('app')
         .constant('URL', {
+            CONSULT_AFF: '/BHDL_TDPD_SIREMAS/siremas/maintenance/commercesAffiliateReport/query',
+            SEARC_CONSULT: '/BHDL_TDPD_SIREMAS/siremas/maintenance/commercesAffiliateReport/query',
             CONTROL_LIST: '/BHDL_TDPD_Back_Customers/rest/validationControlList/validateControlList',
             VALIDATE_BUREAU : '/BHDL_TDPD_Back_Customers/rest/validationCreditBureau/validateCreditBureau',
             VALIDATE_CLIENT : '/BHDL_TDPD_Back_Customers/rest/validationClient/validateClient',
@@ -56,6 +58,7 @@
             UPDATE_CODE_PARAM: '/BHDL_TDPD_SIREMAS/siremas/transactionCode/update',
             ALL_CODE_PARAM: '/BHDL_TDPD_SIREMAS/siremas/transactionCode/getAll?originCode&transactionCode&productType',
             TRANSACTION_TYPE: '/BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=TransactionType',
+            CATALOG_BIN: '/BHDL_TDPD_Back_Credit_Card/rest/productTyper/Get?bin=491697',
             CURRENCY_CODE: 'BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=CurrencyCode',
             TYPE_ROLE: 'BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=RuleType',
             PRODUCT_TYPE: 'BHDL_TDPD_SIREMAS/siremas/catalog/getCatalogByCode?code=ProductType',

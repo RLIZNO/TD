@@ -38,11 +38,11 @@
          *
          *	@return {Object} La respuesta del servicio.
          */
-        function getvalidateClientCreditCard(idValue, userName, typeDocumentValue) {
+        function getvalidateClientCreditCard(idValue, userName, typeDocumentValue, typeProducto) {
 
             var deferred = $q.defer();
 
-            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_CREDIT_CARD + '?documentNumber=' + idValue + '&userName=' + userName + '&documentType=' + typeDocumentValue)
+            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_CREDIT_CARD + '?documentNumber=' + idValue + '&userName=' + userName + '&documentType=' + typeDocumentValue + '&bin=' + typeProducto)
                 .then(
                     function (response) {
                     	if(response.data.success) {
@@ -144,11 +144,11 @@
          *
          *  @return {Object} La respuesta del servicio.
          */
-        function getValidaFico(date, ducumenNumber, typeDocumentValue, typeHousing, housingTime, userName, income) {
+        function getValidaFico(date, ducumenNumber, typeDocumentValue, typeHousing, housingTime, userName, income, typeProducto) {
 
             var deferred = $q.defer();
 
-            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_FICO + '?contractDate=' + date + '&documentNumber=' + ducumenNumber + '&documentType=' + typeDocumentValue + '&housingType=' + typeHousing + '&housingTime=' + housingTime + '&userName=' + userName + '&customerIncome=' + income)
+            $http.get(PREFIX_URL.SERVICES + URL.VALIDATE_FICO + '?contractDate=' + date + '&documentNumber=' + ducumenNumber + '&documentType=' + typeDocumentValue + '&housingType=' + typeHousing + '&housingTime=' + housingTime + '&userName=' + userName + '&customerIncome=' + income + '&bin=' + typeProducto)
                 .then(
                     function (response) {
                         if(response.data.success) {

@@ -18,6 +18,9 @@
         'transactionComerceModule',
         'transactionRoleModule',
         'formalizationResultModule',
+        'parameConsultAffModule',
+        'parameConsultClientModule',
+
 
 
         //module components

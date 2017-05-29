@@ -102,7 +102,7 @@
 				success : {
 					codeCorrect : 'El código digitado es correcto',
 					productSuccess: 'El producto se inserto correctamente',
-					printSuccess:    'El producto se envío a imprimir, por favor espere'
+					printSuccess:    'La tarjeta de crédito se encuentra en proceso de impresión, por favor espere'
 				}
 	    	},
 	    	steps : {
